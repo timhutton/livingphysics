@@ -386,7 +386,7 @@ class PullingChallenge extends Challenge {
     title = "Pull";
     desc = "Pull the red atom along the track to connect it to the green atom.";
     desc2 = "Keep the track intact.";
-    min_reactions_required = 5;
+    min_reactions_required = 4;
   }
   void init()
   {
