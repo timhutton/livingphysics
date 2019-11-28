@@ -117,49 +117,9 @@ String market_url_to_full_version,website_url;
 final boolean is_full_version = true;
 final boolean is_js_version = true;
 
-      /* for android A2D build only:
-void keyPressed()
-{
-  if (key == CODED && keyCode == KeyEvent.KEYCODE_HOME)
-  {
-    System.exit(0); // we quit on home to avoid restart bug in Processing
-  }
-  else if(key==CODED && keyCode==KeyEvent.KEYCODE_BACK)
-  {
-    keyCode = 1; // we don't always want to exit the app (see onBackPressed)
-  }
-}
-public void onStop()
-{
-  super.onStop();
-  System.exit(0); // without this, jumping to a URL causes the browser/market to hang
-}
-         */
-
-// for android A3D build only:
-/*public String sketchRenderer() {
-    return A3D;
-}
-void keyPressed()
-{
-  if(key==CODED && keyCode==KeyEvent.KEYCODE_BACK)
-  {
-    keyCode = 1; // we don't always want to exit the app (see onBackPressed)
-  }
-}*/
-
-// a suggestion on the processing forum; doesn't seem to help
-//void onResume() {
-//  super.onResume();
-//  redraw();
-//}
-
 void setup()
 {
-  // android sizes: 240x320, 240x400, 240x432, 320x480, 480x800, 480x854
-  // http://developer.android.com/guide/practices/screens_support.html
-  size(480,800); // remove this for Android version
-  //orientation(PORTRAIT);  // need this for Android version
+  size(480,800); // started as a mobile phone app
 
   PFont my_font = createFont("SansSerif",32,true);
   textFont(my_font);
