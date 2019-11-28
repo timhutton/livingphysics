@@ -1,4 +1,4 @@
-/* @pjs preload="add2.png,cancel2.png,checkbox_ticked.png,clipboard2.png,cog3.png,help.png,icon-32.png,icon-48.png,icon-72.png,icon-128.png,move_left2.png,move_right2.png,reload2.png,tick2.png,trashcan2.png"; */ 
+/* @pjs preload="livingphysics/data/add2.png,livingphysics/data/cancel2.png,livingphysics/data/checkbox_ticked.png,livingphysics/data/clipboard2.png,livingphysics/data/cog3.png,livingphysics/data/help.png,livingphysics/data/icon-32.png,livingphysics/data/icon-48.png,livingphysics/data/icon-72.png,livingphysics/data/icon-128.png,livingphysics/data/move_left2.png,livingphysics/data/move_right2.png,livingphysics/data/reload2.png,livingphysics/data/tick2.png,livingphysics/data/trashcan2.png"; */
 // (processing.js requires this)
 
 /*
@@ -31,7 +31,7 @@
 
 1.2: (2011-01-03)
 
-- now saves reactions from every level whether succeeded or not 
+- now saves reactions from every level whether succeeded or not
 - new levels in full version: roll, concertina
 - new levels in demo version: extend
 - text in settings mode now width-limited properly
@@ -115,9 +115,9 @@ final boolean is_full_version = true;
 final boolean is_js_version = true;
 
       /* for android A2D build only:
-void keyPressed() 
+void keyPressed()
 {
-  if (key == CODED && keyCode == KeyEvent.KEYCODE_HOME) 
+  if (key == CODED && keyCode == KeyEvent.KEYCODE_HOME)
   {
     System.exit(0); // we quit on home to avoid restart bug in Processing
   }
@@ -130,14 +130,14 @@ public void onStop()
 {
   super.onStop();
   System.exit(0); // without this, jumping to a URL causes the browser/market to hang
-}     
+}
          */
 
 // for android A3D build only:
 /*public String sketchRenderer() {
     return A3D;
 }
-void keyPressed() 
+void keyPressed()
 {
   if(key==CODED && keyCode==KeyEvent.KEYCODE_BACK)
   {
@@ -151,13 +151,13 @@ void keyPressed()
 //  redraw();
 //}
 
-void setup() 
+void setup()
 {
   // android sizes: 240x320, 240x400, 240x432, 320x480, 480x800, 480x854
   // http://developer.android.com/guide/practices/screens_support.html
   size(480,800); // remove this for Android version
   //orientation(PORTRAIT);  // need this for Android version
-  
+
   PFont my_font = createFont("SansSerif",32,true);
   textFont(my_font);
   pix = width/480.0; // we started on 480x800
@@ -167,44 +167,44 @@ void setup()
   else
     market_url_to_full_version = new String("market://details?id=uk.org.livingphysics.app.livingphysics_full");
   website_url = new String("http://sites.google.com/site/livingphysics/");
-  
+
   // show something while we load
   smooth();
-  icon_image = loadImage("icon-128.png");
-  drawSplashScreen();   
-  
+  icon_image = loadImage("livingphysics/data/icon-128.png");
+  drawSplashScreen();
+
   R = 25*pix;
   // (all of our icons are from wikimedia commons)
-  cog_image = loadImage("cog3.png");
-  tick_image = loadImage("tick2.png");
-  add_image = loadImage("add2.png");
-  trashcan_image = loadImage("trashcan2.png");
-  cancel_image = loadImage("cancel2.png");
-  reload_image = loadImage("reload2.png");
-  clipboard_image = loadImage("clipboard2.png");
-  move_left_image = loadImage("move_left2.png");
-  move_right_image = loadImage("move_right2.png");
-  checkbox_ticked_image = loadImage("checkbox_ticked.png");
-  help_image = loadImage("help.png");
+  cog_image = loadImage("livingphysics/data/cog3.png");
+  tick_image = loadImage("livingphysics/data/tick2.png");
+  add_image = loadImage("livingphysics/data/add2.png");
+  trashcan_image = loadImage("livingphysics/data/trashcan2.png");
+  cancel_image = loadImage("livingphysics/data/cancel2.png");
+  reload_image = loadImage("livingphysics/data/reload2.png");
+  clipboard_image = loadImage("livingphysics/data/clipboard2.png");
+  move_left_image = loadImage("livingphysics/data/move_left2.png");
+  move_right_image = loadImage("livingphysics/data/move_right2.png");
+  checkbox_ticked_image = loadImage("livingphysics/data/checkbox_ticked.png");
+  help_image = loadImage("livingphysics/data/help.png");
   events = new ArrayList();
   reactions = new ArrayList();
   isDragging = false;
   is_settings_mode = false;
   succeeded = false;
-  
+
   float dashboard_height = 80*pix;
   atoms_area = new Rect(0,0,width,height-dashboard_height);
   cog_rect = new Rect(width-dashboard_height,height-dashboard_height,dashboard_height,dashboard_height);
   help_rect = new Rect(0,height-dashboard_height,dashboard_height,dashboard_height);
-  
+
   if(is_full_version)
     challenges = (Challenge[])concat(teaser_challenges,full_version_challenges);
   else
     challenges = teaser_challenges;
 
-  loadStatus();  
+  loadStatus();
   loadChallenge();
-    
+
   // create background image (decided this slowed things down too much)
   /*bg_buffer = createGraphics(width,height,P2D);
   bg_buffer.beginDraw();
@@ -215,13 +215,13 @@ void setup()
         constrain(y/float(bg_buffer.height)+random(-0.05,0.05),0,1));
   bg_buffer.updatePixels();
   bg_buffer.endDraw();*/
-  
+
 }
 
 void draw()
 {
   if(frameCount<50) { return; } // leave splash screen for a bit
-    
+
   if(is_settings_mode)
     drawSettingsMode();
   else if(succeeded)
@@ -249,13 +249,13 @@ void draw()
 
 void updateAtoms()
 {
-  for (int i = 0; i < atoms.length; i++) 
+  for (int i = 0; i < atoms.length; i++)
     atoms[i].sumForces();
-  for (int i = 0; i < atoms.length; i++) 
+  for (int i = 0; i < atoms.length; i++)
     atoms[i].move();
 }
 
-void drawAtomsMode() 
+void drawAtomsMode()
 {
   // draw background (clears the screen)
   background(0,0,0);
@@ -266,10 +266,10 @@ void drawAtomsMode()
   // draw bonds
   stroke(200,200,200);
   strokeWeight(6*pix);
-  for (int i = 0; i < atoms.length; i++) 
+  for (int i = 0; i < atoms.length; i++)
     atoms[i].drawBonds();
   // draw atoms
-  for (int i = 0; i < atoms.length; i++) 
+  for (int i = 0; i < atoms.length; i++)
     atoms[i].drawAtom();
   // draw dragging arm
   if(isDragging)
@@ -344,7 +344,7 @@ void mousePressedOnAtomsArea()
       iAtomBeingDragged = i;
     }
   }
-  isDragging = true; 
+  isDragging = true;
 }
 
 void mousePressedInSucceededMode()
@@ -362,28 +362,28 @@ void mousePressedInSucceededMode()
 void drawSuccess()
 {
   noLoop();
-  
+
   int iSolvedChallenge = iChallenge;
-  
+
   challenges[iSolvedChallenge].markAsSolved(true);
   saveStatus();
   events.clear();
-  
+
   boolean moreChallengesRemaining = moveToNextUnsolvedChallengeIfAny();
-  
-  int left = int(40*pix); 
+
+  int left = int(40*pix);
   int top = int(100*pix);
   int right = int(width-40*pix);
   int bottom = int(height-100*pix);
-  
+
   drawAtomsMode();
-  
+
   stroke(230,140,100);
   strokeWeight(1);
   strokeJoin(ROUND);
   fill(30,27,34,220);
   rect(left,top,right-left,bottom-top);
-  
+
   fill(200,200,200);
   setTextSize(32*pix);
   textAlign(CENTER,TOP);
@@ -464,13 +464,13 @@ void drawSplashScreen()
   noFill();
   setTextSize(30*pix);
   textAlign(CENTER,TOP);
-  drawText("Living Physics",50*pix,300*pix,width-100*pix); 
+  drawText("Living Physics",50*pix,300*pix,width-100*pix);
   setTextSize(24*pix);
   if(!is_full_version)
   {
     String s = "Download the full version of Living Physics for more exciting challenges.";
     float h = textHeight(s,width-100*pix);
-    drawText(s,50*pix,height-h-40*pix,width-100*pix); 
+    drawText(s,50*pix,height-h-40*pix,width-100*pix);
   }
 }
 
@@ -525,7 +525,7 @@ boolean moveToNextUnsolvedChallengeIfAny()
 void saveStatus()
 {
   if(is_js_version) return; // saveStrings doesn't work in JS
-  
+
   String challenges_solved[] = new String[challenges.length];
   for(int i=0;i<challenges.length;i++)
     challenges_solved[i] = new String(challenges[i].id + ":" + ((challenges[i].isSolved())?"yes":"no"));
@@ -535,23 +535,23 @@ void saveStatus()
 void drawCheatingDetected()
 {
   events.clear();
-  
+
   setTextSize(32*pix);
   textAlign(CENTER,TOP);
-  int left = int(40*pix); 
+  int left = int(40*pix);
   int right = int(width-40*pix);
   float ht = 110*pix + textHeight(challenges[iChallenge].cheating_message,right-left-20*pix);
   int top = int(height/2-ht/2);
   int bottom = int(height/2+ht/2);
-  
+
   drawAtomsMode();
-  
+
   stroke(230,140,100);
   strokeWeight(1);
   strokeJoin(ROUND);
   fill(30,27,34,220);
   rect(left,top,right-left,bottom-top);
-  
+
   fill(200,200,200);
   image(reload_image,width/2-30*pix,bottom-90*pix,80*pix,80*pix);
   setTextSize(32*pix);
@@ -570,7 +570,7 @@ void mousePressedInCheatingDetectedMode()
 void saveReactions()
 {
   if(is_js_version) return; // saveStrings doesn't work in JS
-  
+
   String reactions_as_strings[] = new String[reactions.size()];
   for(int i=0;i<reactions.size();i++)
   {
@@ -583,13 +583,13 @@ void saveReactions()
 void loadReactions()
 {
   reactions.clear();
-  
+
   if(is_js_version) return; // loadStrings doesn't work in JS
-  
+
   String reactions_as_strings[] = loadStrings(challenges[iChallenge].id+".txt");
   if(reactions_as_strings == null)
     return; // fail silently (file may not exist, that's OK)
-    
+
   for(int i=0;i<reactions_as_strings.length;i++)
   {
     reactions.add(new Reaction(reactions_as_strings[i]));
@@ -599,12 +599,12 @@ void loadReactions()
 void goToURL(String url) // (here as a function in case we need to add functionality)
 {
   link(url);
-}     
+}
 
 void onBackPressed()
 {
   if(showing_atoms_area_help)
-   showing_atoms_area_help = false;   
+   showing_atoms_area_help = false;
   else if(is_settings_mode)
     backButtonPressedInSettingsMode();
   else

@@ -1,11 +1,12 @@
 livingphysics
 =============
 
-Artificial chemistry game. Find it on the Google Play store: https://play.google.com/store/apps/details?id=uk.org.livingphysics.app.livingphysics_full
+Artificial chemistry game. Live version: https://timhutton.github.io/livingphysics/
 
-Code is for Processing 1.5.1.
+This was for several years on the Google Play store: https://play.google.com/store/apps/details?id=uk.org.livingphysics.app.livingphysics_full
+
+Now ported to the web, which is a much better place for executables, being cross-platform and free.
 
 TODO:
 
-- update for latest Processing
-- allow users to make own levels?
+- allow users to make own levels
