@@ -3,10 +3,9 @@ livingphysics
 
 Artificial chemistry game. Live version: https://timhutton.github.io/livingphysics/
 
-This was for several years on the Google Play store: https://play.google.com/store/apps/details?id=uk.org.livingphysics.app.livingphysics_full
+<a href="https://timhutton.github.io/livingphysics/"><img width="200px" src="https://user-images.githubusercontent.com/647092/69833661-3b8ac580-122d-11ea-95a8-a17bb135854a.png"></img></a>
 
-Now ported to the web, which is a much better place for executables, being cross-platform and free.
-
-TODO:
-
-- allow users to make own levels
+History:
+ - OrganicBuilder was a version of this idea, written as a Java applet. Lots of people used it, and in 2007 I wrote <a href="http://www.sq3.org.uk/papers/ob_report.pdf">a paper</a> about what they created.
+ - A port to Android was made, written in Processing, and was for several years available as an app on the Google Play Store. That had something like 30,000 downloads.
+ - Now ported to the web using processing.js
