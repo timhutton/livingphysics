@@ -9,3 +9,9 @@ History:
  - OrganicBuilder was a version of this idea, written as a Java applet. Lots of people used it, and in 2007 I wrote <a href="http://www.sq3.org.uk/papers/ob_report.pdf">a paper</a> about what they created.
  - A port to Android was made, written in Processing, and was for several years available as an app on the Google Play Store. That had something like 30,000 downloads.
  - Now ported to the web using processing.js
+ 
+ TODO:
+ - port to p5.js (a more modern version of processing.js) or to native javascript
+ - make the interface more appropriate for the web
+ - fix the touch events
+ - fix the saving of progress, using localStorage
