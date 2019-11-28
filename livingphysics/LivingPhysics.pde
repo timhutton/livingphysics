@@ -3,6 +3,10 @@
 
 /*
 
+1.5: (2019-11-28)
+
+- ported to processing.js
+
 1.4.3: (2011-05-31)
 
 - updated to processing 1.5.1
@@ -108,7 +112,6 @@ PImage cog_image,tick_image,add_image,
   trashcan_image,cancel_image,reload_image,icon_image,clipboard_image,
   move_left_image,move_right_image,checkbox_ticked_image,help_image;
 Rect cog_rect,help_rect;
-//PGraphics bg_buffer;
 String market_url_to_full_version,website_url;
 
 final boolean is_full_version = true;
@@ -204,18 +207,6 @@ void setup()
 
   loadStatus();
   loadChallenge();
-
-  // create background image (decided this slowed things down too much)
-  /*bg_buffer = createGraphics(width,height,P2D);
-  bg_buffer.beginDraw();
-  bg_buffer.loadPixels();
-  for(int x=0;x<bg_buffer.width;x++)
-    for(int y=0;y<bg_buffer.height;y++)
-      bg_buffer.pixels[y*bg_buffer.width+x] = lerpColor(color(16,47,89),color(0,0,0),
-        constrain(y/float(bg_buffer.height)+random(-0.05,0.05),0,1));
-  bg_buffer.updatePixels();
-  bg_buffer.endDraw();*/
-
 }
 
 void draw()
@@ -262,7 +253,6 @@ void drawAtomsMode()
   fill(16,47,89);
   noStroke();
   atoms_area.drawRect();
-  //image(bg_buffer,0,0);
   // draw bonds
   stroke(200,200,200);
   strokeWeight(6*pix);
