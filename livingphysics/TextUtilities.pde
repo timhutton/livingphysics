@@ -57,6 +57,8 @@ int textTool(String message,float x,float y,float box_width,boolean draw_text)
   } while(line_begin<message.length());
   //if(is_js_version)
   //  text_height *= 0.6;
+
+  text_height *= 2.5; // hacked to fix layout
   return text_height;
 }
 
