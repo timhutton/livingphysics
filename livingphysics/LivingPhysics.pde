@@ -112,9 +112,8 @@ PImage cog_image,tick_image,add_image,
   trashcan_image,cancel_image,reload_image,icon_image,clipboard_image,
   move_left_image,move_right_image,checkbox_ticked_image,help_image;
 Rect cog_rect,help_rect;
-String market_url_to_full_version,website_url;
+String website_url;
 
-final boolean is_full_version = true;
 final boolean is_js_version = true;
 
 void setup()
@@ -125,11 +124,7 @@ void setup()
   textFont(my_font);
   pix = width/480.0; // we started on 480x800
 
-  if(is_js_version) // (can't use "market://" protocol in a javascript environment)
-    market_url_to_full_version = new String("http://www.appbrain.com/app/living-physics-%28full-version%29/uk.org.livingphysics.app.livingphysics_full");
-  else
-    market_url_to_full_version = new String("market://details?id=uk.org.livingphysics.app.livingphysics_full");
-  website_url = new String("http://sites.google.com/site/livingphysics/");
+  website_url = new String("https://github.com/timhutton/livingphysics");
 
   // show something while we load
   smooth();
@@ -160,10 +155,7 @@ void setup()
   cog_rect = new Rect(width-dashboard_height,height-dashboard_height,dashboard_height,dashboard_height);
   help_rect = new Rect(0,height-dashboard_height,dashboard_height,dashboard_height);
 
-  if(is_full_version)
-    challenges = (Challenge[])concat(teaser_challenges,full_version_challenges);
-  else
-    challenges = teaser_challenges;
+  challenges = (Challenge[])concat(teaser_challenges,full_version_challenges);
 
   loadStatus();
   loadChallenge();
@@ -299,11 +291,6 @@ void mousePressedOnAtomsArea()
 
 void mousePressedInSucceededMode()
 {
-  if(!is_full_version && iChallenge==0)
-  {
-    goToURL(market_url_to_full_version);
-  }
-
   succeeded = false;
   loadChallenge();
   loop();
@@ -345,14 +332,8 @@ void drawSuccess()
   }
   else
   {
-    String message = new String();
-    if(is_full_version)
-    {
-      message = "You solved all the challenges!\n\nYou are awesome.";
-      iChallenge = (iSolvedChallenge+1)%challenges.length;
-    }
-    else
-      message = "You did it!\n\nDownload the full version of Living Physics for more exciting challenges!";
+    String message = "You solved all the challenges!\n\nYou are awesome.";
+    iChallenge = (iSolvedChallenge+1)%challenges.length;
     drawText(message,left+10,top+40,right-left-20);
   }
 }
@@ -416,12 +397,6 @@ void drawSplashScreen()
   textAlign(CENTER,TOP);
   drawText("Living Physics",50*pix,300*pix,width-100*pix);
   setTextSize(24*pix);
-  if(!is_full_version)
-  {
-    String s = "Download the full version of Living Physics for more exciting challenges.";
-    float h = textHeight(s,width-100*pix);
-    drawText(s,50*pix,height-h-40*pix,width-100*pix);
-  }
 }
 
 void loadStatus()

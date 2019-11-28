@@ -50,16 +50,7 @@ void showLevelChooser()
   else
   {
     fill(200,200,200,MY_ALPHA);
-    if(is_full_version)
-    {
-      drawText("To suggest ideas for more levels, or to discuss solutions or report bugs, please visit the Living Physics community webpage - tap the tick button.",
-        levels_window.x+75*pix,levels_window.y+55*pix,levels_window.width-150*pix);
-    }
-    else
-    {
-      drawText("Download the full version of Living Physics for more exciting levels!",
-        levels_window.x+75*pix,levels_window.y+55*pix,levels_window.width-150*pix);
-    }
+    drawText("To suggest ideas for more levels, or to discuss solutions or report bugs, please visit the Living Physics community webpage - tap the tick button.",levels_window.x+75*pix,levels_window.y+55*pix,levels_window.width-150*pix);
   }
 }
 
@@ -82,10 +73,7 @@ void mousePressedInLevelChooser()
     showing_levels = false;
     if(i_challenge_being_shown<0 || i_challenge_being_shown>=challenges.length)
     {
-      if(is_full_version)
         goToURL(website_url);
-      else
-        goToURL(market_url_to_full_version);
     }
     else 
     {
