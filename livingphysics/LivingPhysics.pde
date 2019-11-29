@@ -104,11 +104,12 @@ final boolean is_js_version = true;
 
 void setup()
 {
-  size(480,800); // started as a mobile phone app
+  // scale to be 480x800 proportionally as large as possible
+  pix = min(window.innerWidth/480, window.innerHeight/800);
+  size(480*pix, 800*pix);
 
   PFont my_font = createFont("SansSerif",32,true);
   textFont(my_font);
-  pix = width/480.0; // we started on 480x800
 
   website_url = new String("https://github.com/timhutton/livingphysics");
 
