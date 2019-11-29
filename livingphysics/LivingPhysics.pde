@@ -339,6 +339,11 @@ void mouseReleasedInAtomsMode()
   isDragging = false;
 }
 
+void mouseOut()
+{
+    mouseReleased();
+}
+
 void addEvent(int type,int x,int y)
 {
   events.add(new Event(type,x,y));
