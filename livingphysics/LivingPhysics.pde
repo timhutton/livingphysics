@@ -349,17 +349,19 @@ void mouseReleased()
 
 void touchEnd(TouchEvent touchEvent)
 {
-  if(touchEvent.touches.length == 0) { return; }
-  pointerX = touchEvent.touches[0].offsetX;
-  pointerY = touchEvent.touches[0].offsetY;
+  if(touchEvent.touches.length > 0) {
+    pointerX = touchEvent.touches[0].offsetX;
+    pointerY = touchEvent.touches[0].offsetY;
+  }
   pointerReleased();
 }
 
 void touchCancel(TouchEvent touchEvent)
 {
-  if(touchEvent.touches.length == 0) { return; }
-  pointerX = touchEvent.touches[0].offsetX;
-  pointerY = touchEvent.touches[0].offsetY;
+  if(touchEvent.touches.length > 0) {
+    pointerX = touchEvent.touches[0].offsetX;
+    pointerY = touchEvent.touches[0].offsetY;
+  }
   pointerReleased();
 }
 
