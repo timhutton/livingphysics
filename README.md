@@ -1,5 +1,5 @@
-livingphysics
-=============
+Living Physics
+==============
 
 Artificial chemistry game. Live version: https://timhutton.github.io/livingphysics/
 
@@ -13,7 +13,6 @@ History:
  TODO:
  - port to p5.js (a more modern version of processing.js) or to native javascript, or C++ and OpenGL through WebAssembly
  - make the interface more appropriate for the web
- - fix the touch events
  - fix the saving of progress, using localStorage
 
 Testing locally:
