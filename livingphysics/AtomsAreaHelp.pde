@@ -28,8 +28,8 @@ void showAtomsAreaHelp()
 
   if(is_dragging_atoms_area_help_dialog)
   {
-    atoms_area_help_scroll_pos += dragged_atoms_area_help_dialog_y-mouseY;
-    dragged_atoms_area_help_dialog_y = mouseY;
+    atoms_area_help_scroll_pos += dragged_atoms_area_help_dialog_y-pointerY;
+    dragged_atoms_area_help_dialog_y = pointerY;
   }
   atoms_area_help_scroll_pos = constrain(atoms_area_help_scroll_pos,0,atoms_area_help_excess_height);
   
@@ -67,7 +67,7 @@ void showAtomsAreaHelp()
 void mousePressedInAtomsAreaHelpMode()
 {
   // exit if on ok button
-  if(atoms_area_help_ok_button_rect.contains(mouseX,mouseY))
+  if(atoms_area_help_ok_button_rect.contains(pointerX,pointerY))
   {
     showing_atoms_area_help = false;
   }
@@ -76,7 +76,7 @@ void mousePressedInAtomsAreaHelpMode()
   {
     // start dragging the dialog contents up and down
     is_dragging_atoms_area_help_dialog = true;  
-    dragged_atoms_area_help_dialog_y = mouseY;
+    dragged_atoms_area_help_dialog_y = pointerY;
   }
 }
 

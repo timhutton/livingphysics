@@ -49,8 +49,8 @@ void drawSettingsMode()
 
   if(is_dragging_settings_dialog)
   {
-    settings_dialog_scrollPos += dragged_settings_dialog_y-mouseY;
-    dragged_settings_dialog_y = mouseY;
+    settings_dialog_scrollPos += dragged_settings_dialog_y-pointerY;
+    dragged_settings_dialog_y = pointerY;
   }
   settings_dialog_scrollPos = constrain(settings_dialog_scrollPos,0,excess_height);
 
@@ -212,11 +212,11 @@ void mousePressedInSettingsMode()
 {
   if(asking_can_delete_all_reactions)
   {
-    if(nearerThan(mouseX-(width/2-140*pix+40*pix),mouseY-(300*pix+40*pix),45*pix)) // cancel
+    if(nearerThan(pointerX-(width/2-140*pix+40*pix),pointerY-(300*pix+40*pix),45*pix)) // cancel
     {
       asking_can_delete_all_reactions=false;
     }
-    else if(nearerThan(mouseX-(width/2+140*pix-40*pix),mouseY-(300*pix+40*pix),45*pix)) // tick
+    else if(nearerThan(pointerX-(width/2+140*pix-40*pix),pointerY-(300*pix+40*pix),45*pix)) // tick
     {
       asking_can_delete_all_reactions=false;
       reactions.clear();
@@ -224,11 +224,11 @@ void mousePressedInSettingsMode()
   }
   else if(asking_can_reload_challenge)
   {
-    if(nearerThan(mouseX-(width/2-140*pix+40*pix),mouseY-(300*pix+40*pix),45*pix)) // cancel
+    if(nearerThan(pointerX-(width/2-140*pix+40*pix),pointerY-(300*pix+40*pix),45*pix)) // cancel
     {
       asking_can_reload_challenge=false;
     }
-    else if(nearerThan(mouseX-(width/2+140*pix-40*pix),mouseY-(300*pix+40*pix),45*pix)) // tick
+    else if(nearerThan(pointerX-(width/2+140*pix-40*pix),pointerY-(300*pix+40*pix),45*pix)) // tick
     {
       asking_can_reload_challenge=false;
       reloadChallengeKeepingExistingReactions();
@@ -245,38 +245,38 @@ void mousePressedInSettingsMode()
   }
   else if(editing_reaction)
     mousePressedInReactionEditor();
-  else if(challenges[iChallenge].allow_editing_of_reactions && mouseY>reactions_start_y-settings_dialog_scrollPos-radius && 
-    mouseY<reactions_start_y+radius*3*reactions.size()-radius*2-settings_dialog_scrollPos && 
-    mouseX<dialog_border+radius*13) // click on a reaction
+  else if(challenges[iChallenge].allow_editing_of_reactions && pointerY>reactions_start_y-settings_dialog_scrollPos-radius && 
+    pointerY<reactions_start_y+radius*3*reactions.size()-radius*2-settings_dialog_scrollPos && 
+    pointerX<dialog_border+radius*13) // click on a reaction
   {
     editing_reaction=true; 
-    i_reaction_being_edited = int((mouseY - (reactions_start_y-settings_dialog_scrollPos-radius)) / (radius*3));
+    i_reaction_being_edited = int((pointerY - (reactions_start_y-settings_dialog_scrollPos-radius)) / (radius*3));
   }
-  else if(challenges[iChallenge].allow_editing_of_reactions && reactions.size()>0 && delete_all_reactions_rect.contains(mouseX,mouseY))
+  else if(challenges[iChallenge].allow_editing_of_reactions && reactions.size()>0 && delete_all_reactions_rect.contains(pointerX,pointerY))
   {
     asking_can_delete_all_reactions = true;
   }
-  else if(challenges[iChallenge].allow_editing_of_reactions && add_reaction_rect.contains(mouseX,mouseY))
+  else if(challenges[iChallenge].allow_editing_of_reactions && add_reaction_rect.contains(pointerX,pointerY))
   {
     reactions.add(new Reaction(2,0,false,2,0,0,false,0));
     editing_reaction=true;
     i_reaction_being_edited = reactions.size()-1;
   }
-  else if(challenges[iChallenge].allow_editing_of_reactions && levels_rect.contains(mouseX,mouseY))
+  else if(challenges[iChallenge].allow_editing_of_reactions && levels_rect.contains(pointerX,pointerY))
   {
     showing_levels = true;
     i_challenge_being_shown = iChallenge;
   }
-  else if(reload_rect.contains(mouseX,mouseY))
+  else if(reload_rect.contains(pointerX,pointerY))
   {
     asking_can_reload_challenge = true;
   }
-  else if(done_editing_reactions_rect.contains(mouseX,mouseY))
+  else if(done_editing_reactions_rect.contains(pointerX,pointerY))
   {
     is_settings_mode = false;
     saveReactions();
   }
-  else if(help_with_level_rect.contains(mouseX,mouseY))
+  else if(help_with_level_rect.contains(pointerX,pointerY))
   {
     showing_settings_help = true;
   }
@@ -284,7 +284,7 @@ void mousePressedInSettingsMode()
   {
     // start dragging the dialog contents up and down
     is_dragging_settings_dialog = true;  
-    dragged_settings_dialog_y = mouseY;
+    dragged_settings_dialog_y = pointerY;
   }
 }
 

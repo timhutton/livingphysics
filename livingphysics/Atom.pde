@@ -91,9 +91,9 @@ class Atom
   {
     if(isDragging && id==iAtomBeingDragged)
     {
-      float d = mag(x-mouseX,y-mouseY);
-      float dx = (mouseX-x)/d;
-      float dy = (mouseY-y)/d;
+      float d = mag(x-pointerX,y-pointerY);
+      float dx = (pointerX-x)/d;
+      float dy = (pointerY-y)/d;
       vx += dx * user_drag_strength;
       vy += dy * user_drag_strength;
     }

@@ -56,19 +56,19 @@ void showLevelChooser()
 
 void mousePressedInLevelChooser()
 {
-  if(prev_challenge_rect.contains(mouseX,mouseY))
+  if(prev_challenge_rect.contains(pointerX,pointerY))
   {
     i_challenge_being_shown = max(-1,i_challenge_being_shown-1);
   }
-  else if(next_challenge_rect.contains(mouseX,mouseY))
+  else if(next_challenge_rect.contains(pointerX,pointerY))
   {
     i_challenge_being_shown = min(challenges.length,i_challenge_being_shown+1);
   }
-  else if(cancel_challenge_choice_rect.contains(mouseX,mouseY))
+  else if(cancel_challenge_choice_rect.contains(pointerX,pointerY))
   {
     showing_levels = false;
   }
-  else if(accept_challenge_choice_rect.contains(mouseX,mouseY))
+  else if(accept_challenge_choice_rect.contains(pointerX,pointerY))
   {
     showing_levels = false;
     if(i_challenge_being_shown<0 || i_challenge_being_shown>=challenges.length)

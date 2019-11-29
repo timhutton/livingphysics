@@ -74,25 +74,12 @@ Other ideas:
 - tutorial walk-through on first three levels, options to restart tutorial, etc.?
 - add help system on the webpage, link-to from app
 
-
-Website:
-- fill living physics website: user discussion area, suggestions, bug reporting
-- give user an access code when they solve all puzzles, to get credit on website?
-- thank processing
-
-Release checklist:
-- search for TODO strings
-- version
-- strip unwanted files from folders
-- change name and package id for demo version and full
-- build release version of demo & full, sign, zipalign, upload
-- make screenshots
-
 */
 
 Atom[] atoms;
 Rect atoms_area;
 ArrayList reactions;
+int pointerX, pointerY;
 boolean isDragging;
 int iAtomBeingDragged;
 boolean is_settings_mode;
@@ -218,7 +205,7 @@ void drawAtomsMode()
   {
     stroke(180,180,180);
     strokeWeight(pix*10);
-    line(mouseX,mouseY,atoms[iAtomBeingDragged].x,atoms[iAtomBeingDragged].y);
+    line(pointerX,pointerY,atoms[iAtomBeingDragged].x,atoms[iAtomBeingDragged].y);
   }
   // show the last applied reaction
   float last_reaction_display_time = 100;
@@ -257,6 +244,9 @@ void drawAtomsMode()
 
 void mousePressed()
 {
+  pointerX = mouseX;
+  pointerY = mouseY;
+  
   if(is_settings_mode)
     mousePressedInSettingsMode();
   else if(succeeded)
@@ -265,11 +255,11 @@ void mousePressed()
     mousePressedInCheatingDetectedMode();
   else if(showing_atoms_area_help)
     mousePressedInAtomsAreaHelpMode();
-  else if(cog_rect.contains(mouseX,mouseY))
+  else if(cog_rect.contains(pointerX,pointerY))
     is_settings_mode=true;
-  else if(help_rect.contains(mouseX,mouseY))
+  else if(help_rect.contains(pointerX,pointerY))
     showing_atoms_area_help=true;
-  else if(atoms_area.contains(mouseX,mouseY))
+  else if(atoms_area.contains(pointerX,pointerY))
     mousePressedOnAtomsArea();
 }
 
@@ -279,7 +269,7 @@ void mousePressedOnAtomsArea()
   float closest_d = 100000;
   for(int i=0;i<atoms.length;i++)
   {
-    float d = mag(mouseX-atoms[i].x,mouseY-atoms[i].y);
+    float d = mag(pointerX-atoms[i].x,pointerY-atoms[i].y);
     if(d<closest_d)
     {
       closest_d = d;
@@ -340,6 +330,9 @@ void drawSuccess()
 
 void mouseReleased()
 {
+  pointerX = mouseX;
+  pointerY = mouseY;
+
   if(showing_atoms_area_help)
     mouseReleasedInAtomsAreaHelpMode();
   else if(is_settings_mode)
@@ -351,6 +344,18 @@ void mouseReleased()
 void mouseReleasedInAtomsMode()
 {
   isDragging = false;
+}
+
+void mouseMoved()
+{
+  pointerX = mouseX;
+  pointerY = mouseY;
+}
+
+void mouseDragged()
+{
+  pointerX = mouseX;
+  pointerY = mouseY;
 }
 
 void addEvent(int type,int x,int y)

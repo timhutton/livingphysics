@@ -11,7 +11,10 @@ History:
  - Now ported to the web using processing.js
  
  TODO:
- - port to p5.js (a more modern version of processing.js) or to native javascript
+ - port to p5.js (a more modern version of processing.js) or to native javascript, or C++ and OpenGL through WebAssembly
  - make the interface more appropriate for the web
  - fix the touch events
  - fix the saving of progress, using localStorage
+
+Testing locally:
+ - Using Python 3: ```python -m http.server 8080``` and then open this URL: http://localhost:8080/

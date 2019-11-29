@@ -27,8 +27,8 @@ void showReactionEditorHelp()
 
   if(is_dragging_reaction_editor_help_dialog)
   {
-    reaction_editor_help_scroll_pos += dragged_reaction_editor_help_dialog_y-mouseY;
-    dragged_reaction_editor_help_dialog_y = mouseY;
+    reaction_editor_help_scroll_pos += dragged_reaction_editor_help_dialog_y-pointerY;
+    dragged_reaction_editor_help_dialog_y = pointerY;
   }
   reaction_editor_help_scroll_pos = constrain(reaction_editor_help_scroll_pos,0,reaction_editor_help_excess_height);
   
@@ -66,7 +66,7 @@ void showReactionEditorHelp()
 void mousePressedInReactionEditorHelpMode()
 {
   // exit if on ok button
-  if(reaction_editor_help_ok_button_rect.contains(mouseX,mouseY))
+  if(reaction_editor_help_ok_button_rect.contains(pointerX,pointerY))
   {
     showing_reaction_editor_help = false;
   }
@@ -75,7 +75,7 @@ void mousePressedInReactionEditorHelpMode()
   {
     // start dragging the dialog contents up and down
     is_dragging_reaction_editor_help_dialog = true;  
-    dragged_reaction_editor_help_dialog_y = mouseY;
+    dragged_reaction_editor_help_dialog_y = pointerY;
   }
 }
 
