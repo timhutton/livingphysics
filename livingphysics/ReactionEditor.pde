@@ -94,15 +94,15 @@ void showReactionEditor()
     showReactionEditorHelp();
 }
 
-void pointerPressedInReactionEditor()
+void mousePressedInReactionEditor()
 {
   if(asking_can_delete_reaction)
   {
-    if(nearerThan(pointerX-(width/2-140*pix+40*pix),pointerY-(300*pix+40*pix),45*pix)) // cancel
+    if(nearerThan(mouseX-(width/2-140*pix+40*pix),mouseY-(300*pix+40*pix),45*pix)) // cancel
     {
       asking_can_delete_reaction=false;
     }
-    else if(nearerThan(pointerX-(width/2+140*pix-40*pix),pointerY-(300*pix+40*pix),45*pix)) // tick
+    else if(nearerThan(mouseX-(width/2+140*pix-40*pix),mouseY-(300*pix+40*pix),45*pix)) // tick
     {
       asking_can_delete_reaction=false;
       reactions.remove(i_reaction_being_edited);
@@ -110,51 +110,51 @@ void pointerPressedInReactionEditor()
     }
   }
   else if(showing_reaction_editor_help)
-    pointerPressedInReactionEditorHelpMode();
+    mousePressedInReactionEditorHelpMode();
   else 
   {
-    if(pointerX>editing_radius*2.5 && pointerX<editing_radius*4.5 && abs(pointerY-editing_y)<editing_radius) // click on bonded-pre
+    if(mouseX>editing_radius*2.5 && mouseX<editing_radius*4.5 && abs(mouseY-editing_y)<editing_radius) // click on bonded-pre
     {
       Reaction r = (Reaction)reactions.get(i_reaction_being_edited);
       r.bonded_pre = !r.bonded_pre;
       i_atom_being_edited=-1;
     }
-    else if(pointerX>editing_radius*11.5 && pointerX<editing_radius*13 && abs(pointerY-editing_y)<editing_radius) // click on bonded-post
+    else if(mouseX>editing_radius*11.5 && mouseX<editing_radius*13 && abs(mouseY-editing_y)<editing_radius) // click on bonded-post
     {
       Reaction r = (Reaction)reactions.get(i_reaction_being_edited);
       r.bonded_post = !r.bonded_post;
       i_atom_being_edited=-1;
     }
-    else if(nearerThan(pointerX-editing_radius*1.5,pointerY-editing_y,editing_radius))
+    else if(nearerThan(mouseX-editing_radius*1.5,mouseY-editing_y,editing_radius))
     {
       i_atom_being_edited=0;
     }
-    else if(nearerThan(pointerX-editing_radius*5.5,pointerY-editing_y,editing_radius))
+    else if(nearerThan(mouseX-editing_radius*5.5,mouseY-editing_y,editing_radius))
     {
       i_atom_being_edited=1;
     }
-    else if(nearerThan(pointerX-editing_radius*10.5,pointerY-editing_y,editing_radius))
+    else if(nearerThan(mouseX-editing_radius*10.5,mouseY-editing_y,editing_radius))
     {
       i_atom_being_edited=2;
     }
-    else if(nearerThan(pointerX-editing_radius*14,pointerY-editing_y,editing_radius))
+    else if(nearerThan(mouseX-editing_radius*14,mouseY-editing_y,editing_radius))
     {
       i_atom_being_edited=3;
     }
     else if(i_atom_being_edited>=0)
     {
-      if(abs(pointerY-(editing_y+editing_radius*3))<editing_radius)
+      if(abs(mouseY-(editing_y+editing_radius*3))<editing_radius)
       {
-        int new_type = constrain(int((pointerX-editing_radius*0.3)/(editing_radius*2.55)),0,5);
+        int new_type = constrain(int((mouseX-editing_radius*0.3)/(editing_radius*2.55)),0,5);
         Reaction r = (Reaction)reactions.get(i_reaction_being_edited);
         if(i_atom_being_edited==0 || i_atom_being_edited==2)
           r.a_type = new_type;          
         else
           r.b_type = new_type;
       }
-      else if(abs(pointerY-(editing_y+editing_radius*6))<editing_radius)
+      else if(abs(mouseY-(editing_y+editing_radius*6))<editing_radius)
       {
-        int new_state = constrain(int((pointerX-editing_radius*0.15)/(editing_radius*1.55)),0,9);
+        int new_state = constrain(int((mouseX-editing_radius*0.15)/(editing_radius*1.55)),0,9);
         Reaction r = (Reaction)reactions.get(i_reaction_being_edited);
         switch(i_atom_being_edited) {
         case 0: 
@@ -171,17 +171,17 @@ void pointerPressedInReactionEditor()
           break;
         }
       }
-      else if(done_editing_this_reaction_rect.contains(pointerX,pointerY)) // tick
+      else if(done_editing_this_reaction_rect.contains(mouseX,mouseY)) // tick
       {
         i_atom_being_edited=-1;
         editing_reaction=false;
       }
-      else if(delete_this_reaction_rect.contains(pointerX,pointerY)) // trashcan
+      else if(delete_this_reaction_rect.contains(mouseX,mouseY)) // trashcan
       {
         i_atom_being_edited=-1;
         asking_can_delete_reaction = true;
       }
-      else if(help_with_editing_reaction_rect.contains(pointerX,pointerY)) // help
+      else if(help_with_editing_reaction_rect.contains(mouseX,mouseY)) // help
       {
         showing_reaction_editor_help = true;
       }
@@ -190,17 +190,17 @@ void pointerPressedInReactionEditor()
         i_atom_being_edited=-1;
       }
     }
-    else if(done_editing_this_reaction_rect.contains(pointerX,pointerY)) // tick
+    else if(done_editing_this_reaction_rect.contains(mouseX,mouseY)) // tick
     {
       i_atom_being_edited=-1;
       editing_reaction=false;
     }
-    else if(delete_this_reaction_rect.contains(pointerX,pointerY)) // trashcan
+    else if(delete_this_reaction_rect.contains(mouseX,mouseY)) // trashcan
     {
       i_atom_being_edited=-1;
       asking_can_delete_reaction = true;
     }
-    else if(help_with_editing_reaction_rect.contains(pointerX,pointerY)) // help
+    else if(help_with_editing_reaction_rect.contains(mouseX,mouseY)) // help
     {
       showing_reaction_editor_help = true;
     }
@@ -212,10 +212,10 @@ void pointerPressedInReactionEditor()
   }
 }
 
-void pointerReleasedInReactionEditor()
+void mouseReleasedInReactionEditor()
 {
   if(showing_reaction_editor_help)
-    pointerReleasedInReactionEditorHelpMode();
+    mouseReleasedInReactionEditorHelpMode();
 }
 
 void backButtonPressedInReactionEditor()

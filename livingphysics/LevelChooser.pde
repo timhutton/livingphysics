@@ -54,21 +54,21 @@ void showLevelChooser()
   }
 }
 
-void pointerPressedInLevelChooser()
+void mousePressedInLevelChooser()
 {
-  if(prev_challenge_rect.contains(pointerX,pointerY))
+  if(prev_challenge_rect.contains(mouseX,mouseY))
   {
     i_challenge_being_shown = max(-1,i_challenge_being_shown-1);
   }
-  else if(next_challenge_rect.contains(pointerX,pointerY))
+  else if(next_challenge_rect.contains(mouseX,mouseY))
   {
     i_challenge_being_shown = min(challenges.length,i_challenge_being_shown+1);
   }
-  else if(cancel_challenge_choice_rect.contains(pointerX,pointerY))
+  else if(cancel_challenge_choice_rect.contains(mouseX,mouseY))
   {
     showing_levels = false;
   }
-  else if(accept_challenge_choice_rect.contains(pointerX,pointerY))
+  else if(accept_challenge_choice_rect.contains(mouseX,mouseY))
   {
     showing_levels = false;
     if(i_challenge_being_shown<0 || i_challenge_being_shown>=challenges.length)

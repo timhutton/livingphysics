@@ -33,8 +33,8 @@ void showSettingsHelp()
 
   if(is_dragging_settings_help_dialog)
   {
-    settings_help_scroll_pos += dragged_settings_help_dialog_y-pointerY;
-    dragged_settings_help_dialog_y = pointerY;
+    settings_help_scroll_pos += dragged_settings_help_dialog_y-mouseY;
+    dragged_settings_help_dialog_y = mouseY;
   }
   settings_help_scroll_pos = constrain(settings_help_scroll_pos,0,settings_help_excess_height);
   
@@ -69,10 +69,10 @@ void showSettingsHelp()
   }
 }
 
-void pointerPressedInSettingsHelpMode()
+void mousePressedInSettingsHelpMode()
 {
   // exit if on ok button
-  if(settings_help_ok_button_rect.contains(pointerX,pointerY))
+  if(settings_help_ok_button_rect.contains(mouseX,mouseY))
   {
     showing_settings_help = false;
   }
@@ -81,11 +81,11 @@ void pointerPressedInSettingsHelpMode()
   {
     // start dragging the dialog contents up and down
     is_dragging_settings_help_dialog = true;  
-    dragged_settings_help_dialog_y = pointerY;
+    dragged_settings_help_dialog_y = mouseY;
   }
 }
 
-void pointerReleasedInSettingsHelpMode()
+void mouseReleasedInSettingsHelpMode()
 {
   is_dragging_settings_help_dialog = false;
 }

@@ -49,8 +49,8 @@ void drawSettingsMode()
 
   if(is_dragging_settings_dialog)
   {
-    settings_dialog_scrollPos += dragged_settings_dialog_y-pointerY;
-    dragged_settings_dialog_y = pointerY;
+    settings_dialog_scrollPos += dragged_settings_dialog_y-mouseY;
+    dragged_settings_dialog_y = mouseY;
   }
   settings_dialog_scrollPos = constrain(settings_dialog_scrollPos,0,excess_height);
 
@@ -208,15 +208,15 @@ void showMessage(String message,int MY_ALPHA)
   image(tick_image,width/2-40*pix,height-v_border-90*pix,80*pix,80*pix);
 }
 
-void pointerPressedInSettingsMode()
+void mousePressedInSettingsMode()
 {
   if(asking_can_delete_all_reactions)
   {
-    if(nearerThan(pointerX-(width/2-140*pix+40*pix),pointerY-(300*pix+40*pix),45*pix)) // cancel
+    if(nearerThan(mouseX-(width/2-140*pix+40*pix),mouseY-(300*pix+40*pix),45*pix)) // cancel
     {
       asking_can_delete_all_reactions=false;
     }
-    else if(nearerThan(pointerX-(width/2+140*pix-40*pix),pointerY-(300*pix+40*pix),45*pix)) // tick
+    else if(nearerThan(mouseX-(width/2+140*pix-40*pix),mouseY-(300*pix+40*pix),45*pix)) // tick
     {
       asking_can_delete_all_reactions=false;
       reactions.clear();
@@ -224,11 +224,11 @@ void pointerPressedInSettingsMode()
   }
   else if(asking_can_reload_challenge)
   {
-    if(nearerThan(pointerX-(width/2-140*pix+40*pix),pointerY-(300*pix+40*pix),45*pix)) // cancel
+    if(nearerThan(mouseX-(width/2-140*pix+40*pix),mouseY-(300*pix+40*pix),45*pix)) // cancel
     {
       asking_can_reload_challenge=false;
     }
-    else if(nearerThan(pointerX-(width/2+140*pix-40*pix),pointerY-(300*pix+40*pix),45*pix)) // tick
+    else if(nearerThan(mouseX-(width/2+140*pix-40*pix),mouseY-(300*pix+40*pix),45*pix)) // tick
     {
       asking_can_reload_challenge=false;
       reloadChallengeKeepingExistingReactions();
@@ -236,47 +236,47 @@ void pointerPressedInSettingsMode()
     }
   }
   else if(showing_settings_help)
-    pointerPressedInSettingsHelpMode();
+    mousePressedInSettingsHelpMode();
   else if(showing_levels)
-    pointerPressedInLevelChooser();
+    mousePressedInLevelChooser();
   else if(showing_message)
   {
     showing_message = false;
   }
   else if(editing_reaction)
-    pointerPressedInReactionEditor();
-  else if(challenges[iChallenge].allow_editing_of_reactions && pointerY>reactions_start_y-settings_dialog_scrollPos-radius && 
-    pointerY<reactions_start_y+radius*3*reactions.size()-radius*2-settings_dialog_scrollPos && 
-    pointerX<dialog_border+radius*13) // click on a reaction
+    mousePressedInReactionEditor();
+  else if(challenges[iChallenge].allow_editing_of_reactions && mouseY>reactions_start_y-settings_dialog_scrollPos-radius && 
+    mouseY<reactions_start_y+radius*3*reactions.size()-radius*2-settings_dialog_scrollPos && 
+    mouseX<dialog_border+radius*13) // click on a reaction
   {
     editing_reaction=true; 
-    i_reaction_being_edited = int((pointerY - (reactions_start_y-settings_dialog_scrollPos-radius)) / (radius*3));
+    i_reaction_being_edited = int((mouseY - (reactions_start_y-settings_dialog_scrollPos-radius)) / (radius*3));
   }
-  else if(challenges[iChallenge].allow_editing_of_reactions && reactions.size()>0 && delete_all_reactions_rect.contains(pointerX,pointerY))
+  else if(challenges[iChallenge].allow_editing_of_reactions && reactions.size()>0 && delete_all_reactions_rect.contains(mouseX,mouseY))
   {
     asking_can_delete_all_reactions = true;
   }
-  else if(challenges[iChallenge].allow_editing_of_reactions && add_reaction_rect.contains(pointerX,pointerY))
+  else if(challenges[iChallenge].allow_editing_of_reactions && add_reaction_rect.contains(mouseX,mouseY))
   {
     reactions.add(new Reaction(2,0,false,2,0,0,false,0));
     editing_reaction=true;
     i_reaction_being_edited = reactions.size()-1;
   }
-  else if(challenges[iChallenge].allow_editing_of_reactions && levels_rect.contains(pointerX,pointerY))
+  else if(challenges[iChallenge].allow_editing_of_reactions && levels_rect.contains(mouseX,mouseY))
   {
     showing_levels = true;
     i_challenge_being_shown = iChallenge;
   }
-  else if(reload_rect.contains(pointerX,pointerY))
+  else if(reload_rect.contains(mouseX,mouseY))
   {
     asking_can_reload_challenge = true;
   }
-  else if(done_editing_reactions_rect.contains(pointerX,pointerY))
+  else if(done_editing_reactions_rect.contains(mouseX,mouseY))
   {
     is_settings_mode = false;
     saveReactions();
   }
-  else if(help_with_level_rect.contains(pointerX,pointerY))
+  else if(help_with_level_rect.contains(mouseX,mouseY))
   {
     showing_settings_help = true;
   }
@@ -284,18 +284,18 @@ void pointerPressedInSettingsMode()
   {
     // start dragging the dialog contents up and down
     is_dragging_settings_dialog = true;  
-    dragged_settings_dialog_y = pointerY;
+    dragged_settings_dialog_y = mouseY;
   }
 }
 
-void pointerReleasedInSettingsMode()
+void mouseReleasedInSettingsMode()
 {
   if(showing_settings_help)
-    pointerReleasedInSettingsHelpMode();
+    mouseReleasedInSettingsHelpMode();
   else if(editing_reaction)
-    pointerReleasedInReactionEditor();
+    mouseReleasedInReactionEditor();
   //else if(showing_levels)
-  //  pointerReleasedInLevelChooser();
+  //  mouseReleasedInLevelChooser();
   else
     is_dragging_settings_dialog = false;
 }

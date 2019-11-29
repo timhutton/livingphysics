@@ -79,7 +79,6 @@ Other ideas:
 Atom[] atoms;
 Rect atoms_area;
 ArrayList reactions;
-int pointerX, pointerY;
 boolean isDragging;
 int iAtomBeingDragged;
 boolean is_settings_mode;
@@ -205,7 +204,7 @@ void drawAtomsMode()
   {
     stroke(180,180,180);
     strokeWeight(pix*10);
-    line(pointerX,pointerY,atoms[iAtomBeingDragged].x,atoms[iAtomBeingDragged].y);
+    line(mouseX,mouseY,atoms[iAtomBeingDragged].x,atoms[iAtomBeingDragged].y);
   }
   // show the last applied reaction
   float last_reaction_display_time = 100;
@@ -244,44 +243,29 @@ void drawAtomsMode()
 
 void mousePressed()
 {
-  pointerX = mouseX;
-  pointerY = mouseY;
-  pointerPressed();
-}
-
-void touchStart(TouchEvent touchEvent)
-{
-  if(touchEvent.touches.length == 0) { return; }
-  pointerX = touchEvent.touches[0].offsetX;
-  pointerY = touchEvent.touches[0].offsetY;
-  pointerPressed();
-}
-
-void pointerPressed()
-{
   if(is_settings_mode)
-    pointerPressedInSettingsMode();
+    mousePressedInSettingsMode();
   else if(succeeded)
-    pointerPressedInSucceededMode();
+    mousePressedInSucceededMode();
   else if(cheating_detected)
-    pointerPressedInCheatingDetectedMode();
+    mousePressedInCheatingDetectedMode();
   else if(showing_atoms_area_help)
-    pointerPressedInAtomsAreaHelpMode();
-  else if(cog_rect.contains(pointerX,pointerY))
+    mousePressedInAtomsAreaHelpMode();
+  else if(cog_rect.contains(mouseX,mouseY))
     is_settings_mode=true;
-  else if(help_rect.contains(pointerX,pointerY))
+  else if(help_rect.contains(mouseX,mouseY))
     showing_atoms_area_help=true;
-  else if(atoms_area.contains(pointerX,pointerY))
-    pointerPressedOnAtomsArea();
+  else if(atoms_area.contains(mouseX,mouseY))
+    mousePressedOnAtomsArea();
 }
 
-void pointerPressedOnAtomsArea()
+void mousePressedOnAtomsArea()
 {
   // is there an atom at that location?
   float closest_d = 100000;
   for(int i=0;i<atoms.length;i++)
   {
-    float d = mag(pointerX-atoms[i].x,pointerY-atoms[i].y);
+    float d = mag(mouseX-atoms[i].x,mouseY-atoms[i].y);
     if(d<closest_d)
     {
       closest_d = d;
@@ -291,7 +275,7 @@ void pointerPressedOnAtomsArea()
   isDragging = true;
 }
 
-void pointerPressedInSucceededMode()
+void mousePressedInSucceededMode()
 {
   succeeded = false;
   loadChallenge();
@@ -342,68 +326,17 @@ void drawSuccess()
 
 void mouseReleased()
 {
-  pointerX = mouseX;
-  pointerY = mouseY;
-  pointerReleased();
-}
-
-void touchEnd(TouchEvent touchEvent)
-{
-  if(touchEvent.touches.length > 0) {
-    pointerX = touchEvent.touches[0].offsetX;
-    pointerY = touchEvent.touches[0].offsetY;
-  }
-  pointerReleased();
-}
-
-void touchCancel(TouchEvent touchEvent)
-{
-  if(touchEvent.touches.length > 0) {
-    pointerX = touchEvent.touches[0].offsetX;
-    pointerY = touchEvent.touches[0].offsetY;
-  }
-  pointerReleased();
-}
-
-void pointerReleased()
-{
   if(showing_atoms_area_help)
-    pointerReleasedInAtomsAreaHelpMode();
+    mouseReleasedInAtomsAreaHelpMode();
   else if(is_settings_mode)
-    pointerReleasedInSettingsMode();
+    mouseReleasedInSettingsMode();
   else
-    pointerReleasedInAtomsMode();
+    mouseReleasedInAtomsMode();
 }
 
-void pointerReleasedInAtomsMode()
+void mouseReleasedInAtomsMode()
 {
   isDragging = false;
-}
-
-void mouseMoved()
-{
-  pointerX = mouseX;
-  pointerY = mouseY;
-  // (no touch equivalent)
-}
-
-void mouseDragged()
-{
-  pointerX = mouseX;
-  pointerY = mouseY;
-  pointerDragged();
-}
-
-void touchMove(TouchEvent touchEvent)
-{
-  if(touchEvent.touches.length == 0) { return; }
-  pointerX = touchEvent.touches[0].offsetX;
-  pointerY = touchEvent.touches[0].offsetY;
-  pointerDragged(); // (touch moving is equivalent to mouse being dragged)
-}
-
-void pointerDragged()
-{
 }
 
 void addEvent(int type,int x,int y)
@@ -537,7 +470,7 @@ void drawCheatingDetected()
   drawText(challenges[iChallenge].cheating_message,left+10*pix,top+10*pix,right-left-20*pix);
 }
 
-void pointerPressedInCheatingDetectedMode()
+void mousePressedInCheatingDetectedMode()
 {
   // reload the challenge, go to the settings screen
   cheating_detected = false;
