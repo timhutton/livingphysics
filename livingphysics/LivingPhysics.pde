@@ -251,6 +251,7 @@ void mousePressed()
 
 void touchStart(TouchEvent touchEvent)
 {
+  if(touchEvent.touches.length == 0) { return; }
   pointerX = touchEvent.touches[0].offsetX;
   pointerY = touchEvent.touches[0].offsetY;
   pointerPressed();
@@ -348,6 +349,7 @@ void mouseReleased()
 
 void touchEnd(TouchEvent touchEvent)
 {
+  if(touchEvent.touches.length == 0) { return; }
   pointerX = touchEvent.touches[0].offsetX;
   pointerY = touchEvent.touches[0].offsetY;
   pointerReleased();
@@ -355,6 +357,7 @@ void touchEnd(TouchEvent touchEvent)
 
 void touchCancel(TouchEvent touchEvent)
 {
+  if(touchEvent.touches.length == 0) { return; }
   pointerX = touchEvent.touches[0].offsetX;
   pointerY = touchEvent.touches[0].offsetY;
   pointerReleased();
@@ -391,6 +394,7 @@ void mouseDragged()
 
 void touchMove(TouchEvent touchEvent)
 {
+  if(touchEvent.touches.length == 0) { return; }
   pointerX = touchEvent.touches[0].offsetX;
   pointerY = touchEvent.touches[0].offsetY;
   pointerDragged(); // (touch moving is equivalent to mouse being dragged)
