@@ -246,24 +246,35 @@ void mousePressed()
 {
   pointerX = mouseX;
   pointerY = mouseY;
-  
+  pointerPressed();
+}
+
+void touchStart(TouchEvent touchEvent)
+{
+  pointerX = touchEvent.touches[0].offsetX;
+  pointerY = touchEvent.touches[0].offsetY;
+  pointerPressed();
+}
+
+void pointerPressed()
+{
   if(is_settings_mode)
-    mousePressedInSettingsMode();
+    pointerPressedInSettingsMode();
   else if(succeeded)
-    mousePressedInSucceededMode();
+    pointerPressedInSucceededMode();
   else if(cheating_detected)
-    mousePressedInCheatingDetectedMode();
+    pointerPressedInCheatingDetectedMode();
   else if(showing_atoms_area_help)
-    mousePressedInAtomsAreaHelpMode();
+    pointerPressedInAtomsAreaHelpMode();
   else if(cog_rect.contains(pointerX,pointerY))
     is_settings_mode=true;
   else if(help_rect.contains(pointerX,pointerY))
     showing_atoms_area_help=true;
   else if(atoms_area.contains(pointerX,pointerY))
-    mousePressedOnAtomsArea();
+    pointerPressedOnAtomsArea();
 }
 
-void mousePressedOnAtomsArea()
+void pointerPressedOnAtomsArea()
 {
   // is there an atom at that location?
   float closest_d = 100000;
@@ -279,7 +290,7 @@ void mousePressedOnAtomsArea()
   isDragging = true;
 }
 
-void mousePressedInSucceededMode()
+void pointerPressedInSucceededMode()
 {
   succeeded = false;
   loadChallenge();
@@ -332,16 +343,34 @@ void mouseReleased()
 {
   pointerX = mouseX;
   pointerY = mouseY;
-
-  if(showing_atoms_area_help)
-    mouseReleasedInAtomsAreaHelpMode();
-  else if(is_settings_mode)
-    mouseReleasedInSettingsMode();
-  else
-    mouseReleasedInAtomsMode();
+  pointerReleased();
 }
 
-void mouseReleasedInAtomsMode()
+void touchEnd(TouchEvent touchEvent)
+{
+  pointerX = touchEvent.touches[0].offsetX;
+  pointerY = touchEvent.touches[0].offsetY;
+  pointerReleased();
+}
+
+void touchCancel(TouchEvent touchEvent)
+{
+  pointerX = touchEvent.touches[0].offsetX;
+  pointerY = touchEvent.touches[0].offsetY;
+  pointerReleased();
+}
+
+void pointerReleased()
+{
+  if(showing_atoms_area_help)
+    pointerReleasedInAtomsAreaHelpMode();
+  else if(is_settings_mode)
+    pointerReleasedInSettingsMode();
+  else
+    pointerReleasedInAtomsMode();
+}
+
+void pointerReleasedInAtomsMode()
 {
   isDragging = false;
 }
@@ -350,12 +379,25 @@ void mouseMoved()
 {
   pointerX = mouseX;
   pointerY = mouseY;
+  // (no touch equivalent)
 }
 
 void mouseDragged()
 {
   pointerX = mouseX;
   pointerY = mouseY;
+  pointerDragged();
+}
+
+void touchMove(TouchEvent touchEvent)
+{
+  pointerX = touchEvent.touches[0].offsetX;
+  pointerY = touchEvent.touches[0].offsetY;
+  pointerDragged(); // (touch moving is equivalent to mouse being dragged)
+}
+
+void pointerDragged()
+{
 }
 
 void addEvent(int type,int x,int y)
@@ -489,7 +531,7 @@ void drawCheatingDetected()
   drawText(challenges[iChallenge].cheating_message,left+10*pix,top+10*pix,right-left-20*pix);
 }
 
-void mousePressedInCheatingDetectedMode()
+void pointerPressedInCheatingDetectedMode()
 {
   // reload the challenge, go to the settings screen
   cheating_detected = false;

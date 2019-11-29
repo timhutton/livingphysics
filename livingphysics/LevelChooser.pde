@@ -54,7 +54,7 @@ void showLevelChooser()
   }
 }
 
-void mousePressedInLevelChooser()
+void pointerPressedInLevelChooser()
 {
   if(prev_challenge_rect.contains(pointerX,pointerY))
   {

@@ -208,7 +208,7 @@ void showMessage(String message,int MY_ALPHA)
   image(tick_image,width/2-40*pix,height-v_border-90*pix,80*pix,80*pix);
 }
 
-void mousePressedInSettingsMode()
+void pointerPressedInSettingsMode()
 {
   if(asking_can_delete_all_reactions)
   {
@@ -236,15 +236,15 @@ void mousePressedInSettingsMode()
     }
   }
   else if(showing_settings_help)
-    mousePressedInSettingsHelpMode();
+    pointerPressedInSettingsHelpMode();
   else if(showing_levels)
-    mousePressedInLevelChooser();
+    pointerPressedInLevelChooser();
   else if(showing_message)
   {
     showing_message = false;
   }
   else if(editing_reaction)
-    mousePressedInReactionEditor();
+    pointerPressedInReactionEditor();
   else if(challenges[iChallenge].allow_editing_of_reactions && pointerY>reactions_start_y-settings_dialog_scrollPos-radius && 
     pointerY<reactions_start_y+radius*3*reactions.size()-radius*2-settings_dialog_scrollPos && 
     pointerX<dialog_border+radius*13) // click on a reaction
@@ -288,14 +288,14 @@ void mousePressedInSettingsMode()
   }
 }
 
-void mouseReleasedInSettingsMode()
+void pointerReleasedInSettingsMode()
 {
   if(showing_settings_help)
-    mouseReleasedInSettingsHelpMode();
+    pointerReleasedInSettingsHelpMode();
   else if(editing_reaction)
-    mouseReleasedInReactionEditor();
+    pointerReleasedInReactionEditor();
   //else if(showing_levels)
-  //  mouseReleasedInLevelChooser();
+  //  pointerReleasedInLevelChooser();
   else
     is_dragging_settings_dialog = false;
 }

@@ -64,7 +64,7 @@ void showAtomsAreaHelp()
   }
 }
 
-void mousePressedInAtomsAreaHelpMode()
+void pointerPressedInAtomsAreaHelpMode()
 {
   // exit if on ok button
   if(atoms_area_help_ok_button_rect.contains(pointerX,pointerY))
@@ -80,7 +80,7 @@ void mousePressedInAtomsAreaHelpMode()
   }
 }
 
-void mouseReleasedInAtomsAreaHelpMode()
+void pointerReleasedInAtomsAreaHelpMode()
 {
   is_dragging_atoms_area_help_dialog = false;
 }

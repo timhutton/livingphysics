@@ -94,7 +94,7 @@ void showReactionEditor()
     showReactionEditorHelp();
 }
 
-void mousePressedInReactionEditor()
+void pointerPressedInReactionEditor()
 {
   if(asking_can_delete_reaction)
   {
@@ -110,7 +110,7 @@ void mousePressedInReactionEditor()
     }
   }
   else if(showing_reaction_editor_help)
-    mousePressedInReactionEditorHelpMode();
+    pointerPressedInReactionEditorHelpMode();
   else 
   {
     if(pointerX>editing_radius*2.5 && pointerX<editing_radius*4.5 && abs(pointerY-editing_y)<editing_radius) // click on bonded-pre
@@ -212,10 +212,10 @@ void mousePressedInReactionEditor()
   }
 }
 
-void mouseReleasedInReactionEditor()
+void pointerReleasedInReactionEditor()
 {
   if(showing_reaction_editor_help)
-    mouseReleasedInReactionEditorHelpMode();
+    pointerReleasedInReactionEditorHelpMode();
 }
 
 void backButtonPressedInReactionEditor()

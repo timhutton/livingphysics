@@ -69,7 +69,7 @@ void showSettingsHelp()
   }
 }
 
-void mousePressedInSettingsHelpMode()
+void pointerPressedInSettingsHelpMode()
 {
   // exit if on ok button
   if(settings_help_ok_button_rect.contains(pointerX,pointerY))
@@ -85,7 +85,7 @@ void mousePressedInSettingsHelpMode()
   }
 }
 
-void mouseReleasedInSettingsHelpMode()
+void pointerReleasedInSettingsHelpMode()
 {
   is_dragging_settings_help_dialog = false;
 }

@@ -63,7 +63,7 @@ void showReactionEditorHelp()
   }
 }
 
-void mousePressedInReactionEditorHelpMode()
+void pointerPressedInReactionEditorHelpMode()
 {
   // exit if on ok button
   if(reaction_editor_help_ok_button_rect.contains(pointerX,pointerY))
@@ -79,7 +79,7 @@ void mousePressedInReactionEditorHelpMode()
   }
 }
 
-void mouseReleasedInReactionEditorHelpMode()
+void pointerReleasedInReactionEditorHelpMode()
 {
   is_dragging_reaction_editor_help_dialog = false;
 }
