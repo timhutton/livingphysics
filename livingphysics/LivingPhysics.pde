@@ -240,6 +240,12 @@ void drawAtomsMode()
   }
   cog_rect.drawImage(cog_image);
   help_rect.drawImage(help_image);
+
+  // Show FPS
+  fill(200,200,200);
+  setTextSize(16*pix);
+  textAlign(LEFT,TOP);
+  drawText(str(int(frameRate))+" fps",5,5,400);
 }
 
 void mousePressed()
