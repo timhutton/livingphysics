@@ -399,28 +399,25 @@ void drawSplashScreen()
 
 void loadStatus()
 {
-  if(!is_js_version) // loadStrings doesn't work on JS
+  String challenges_solved[] = loadStrings("challenges_solved.txt");
+  if(challenges_solved==null)
   {
-    String challenges_solved[] = loadStrings("challenges_solved.txt");
-    if(challenges_solved==null)
+    // initialise our strings
+    saveStatus();
+  }
+  else
+  {
+    // parse the strings
+    for(int i=0;i<challenges.length;i++)
     {
-      // initialise our strings
-      saveStatus();
-    }
-    else
-    {
-      // parse the strings
-      for(int i=0;i<challenges.length;i++)
+      // search for this challenge in the list of strings
+      for(int j=0;j<challenges_solved.length;j++)
       {
-        // search for this challenge in the list of strings
-        for(int j=0;j<challenges_solved.length;j++)
+        if(match(challenges_solved[j],challenges[i].id)!=null)
         {
-          if(match(challenges_solved[j],challenges[i].id)!=null)
-          {
-            String tokens[] = split(challenges_solved[j],":");
-            challenges[i].markAsSolved(match(tokens[1],"yes")!=null);
-            break;
-          }
+          String tokens[] = split(challenges_solved[j],":");
+          challenges[i].markAsSolved(match(tokens[1],"yes")!=null);
+          break;
         }
       }
     }
@@ -447,8 +444,6 @@ boolean moveToNextUnsolvedChallengeIfAny()
 
 void saveStatus()
 {
-  if(is_js_version) return; // saveStrings doesn't work in JS
-
   String challenges_solved[] = new String[challenges.length];
   for(int i=0;i<challenges.length;i++)
     challenges_solved[i] = new String(challenges[i].id + ":" + ((challenges[i].isSolved())?"yes":"no"));
@@ -492,8 +487,6 @@ void mousePressedInCheatingDetectedMode()
 
 void saveReactions()
 {
-  if(is_js_version) return; // saveStrings doesn't work in JS
-
   String reactions_as_strings[] = new String[reactions.size()];
   for(int i=0;i<reactions.size();i++)
   {
@@ -506,8 +499,6 @@ void saveReactions()
 void loadReactions()
 {
   reactions.clear();
-
-  if(is_js_version) return; // loadStrings doesn't work in JS
 
   String reactions_as_strings[] = loadStrings(challenges[iChallenge].id+".txt");
   if(reactions_as_strings == null)
