@@ -1028,31 +1028,36 @@ class MatchChallenge extends Challenge {
   MatchChallenge() {
     id = "match";
     title = "Match";
-    desc = "Without changing the states of the edge atoms or breaking the pair, bond the free-floating atoms to their matching colors on the edge.";
-    desc2 = "Can you do it without relying on pulling the atoms into place?";
+    desc = "Without changing the states of the edge atoms or breaking the pair, bond each atom of the pair to its matching color on the edge.";
+    desc2 = "Can you get it to work reliably without having to pull the atoms into place?";
     min_reactions_required = 8;
   }
   void init()
   {
     float sep=3.5*R;
-    int nv = int(atoms_area.height/sep);
+    int nv = int(atoms_area.height/sep); // number of atoms vertically up each side
     atoms = new Atom[nv*2+6+2];
     int i;
+    // add the fixed atoms on the two sides
     for(i=0;i<nv;i++)
     {
       atoms[i] = new Atom(R,R+sep*i,i,1,0,atoms);
       atoms[i].stuck = true;
-      atoms[nv+i] = new Atom(atoms_area.width-R,R+sep*i,nv+i,1,0,atoms);
+      atoms[nv+i] = new Atom(atoms_area.width-R,R+sep*i,nv+i,1,0,atoms); // all yellow-zero for now
       atoms[nv+i].stuck = true;
     }
+    // make a random neighboring pair on one side into red-purple
     int side = int(random(2));
     int start = side*nv + 1+int(random(nv-2));
-    atoms[start].type = 5;
-    atoms[start+1].type = 0;
-    int ts[] = {0,5,1};
+    atoms[start].type = 5; // purple
+    atoms[start+1].type = 0; // red
+    // set the colors of the other atoms on both sides to random colors in (red, yellow, purple)
+    // but without making any more red-purple pairs
+    int ts[] = {0,5,1}; // red, purple, yellow
     for(i=1;i<nv-1;i++)
     {
-      if(atoms[i].type==1){
+      if(atoms[i].type==1) // if currently yellow
+      {
         do {
           atoms[i].type = ts[int(random(0,100))%3];
         } while((atoms[i].type==0 && atoms[i-1].type==5) || (atoms[i].type==5 && atoms[i-1].type==0) || 
@@ -1068,18 +1073,19 @@ class MatchChallenge extends Challenge {
           (atoms[i].type==0 && atoms[i+1].type==5) || (atoms[i].type==5 && atoms[i+1].type==0));
       }
     }
-    i = nv*2+6;
-    atoms[i] = new Atom(atoms_area.width/2,atoms_area.height/2,i,0,1,atoms);
-    i++;
-    atoms[i] = new Atom(atoms_area.width/2,atoms_area.height/2+2*R,i,5,1,atoms);
-    atoms[i].makeBond(atoms[i-1]);
-    int ts2[] = {2,3,4};
+    // add the free-floating atoms
+    int ts2[] = {2,3,4}; // green-, cyan-, blue-zero
     for(i=nv*2;i<nv*2+6;i++)
     {
       PVector pos = findAClearPlaceForAtom();
       atoms[i] = new Atom(pos.x,pos.y,i,ts2[i%3],0,atoms);
     }
-
+    // add the two bonded atoms (red-one, purple-one)
+    i = nv*2+6;
+    atoms[i] = new Atom(atoms_area.width/2,atoms_area.height/2,i,0,1,atoms);
+    i++;
+    atoms[i] = new Atom(atoms_area.width/2,atoms_area.height/2+2*R,i,5,1,atoms);
+    atoms[i].makeBond(atoms[i-1]);
   }
   void evaluateSuccess()
   {
