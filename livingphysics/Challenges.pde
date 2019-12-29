@@ -40,8 +40,8 @@
 Challenge teaser_challenges[] = {
   new LineChallenge(), // 0
   new JoinChallenge(), // 1
-  new SplitLadderChallenge(), // 1
   new SurroundChallenge(), // 1.1
+  new SplitLadderChallenge(), // 1
   new BreakOutChallenge(), // 1.5
   new SignalChallenge(), // 1.5
   new FitChallenge(), // 2

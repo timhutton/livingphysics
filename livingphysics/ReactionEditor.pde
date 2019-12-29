@@ -78,7 +78,7 @@ void showReactionEditor()
 
   if(!showing_message && !showed_surround_hint && match(challenges[iChallenge].title,"Surround")!=null)
   {
-    message_being_shown = new String("Hint:    Click *on* an atom in this window to change its color and its state number.");
+    message_being_shown = new String("Hint:    Click *on* an atom in this window to change its color or its state number.");
     showing_message = true;
     showed_surround_hint = true;
   }
