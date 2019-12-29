@@ -73,11 +73,11 @@ class Reaction
     // for now we assume single digit states, e.g. a3+b1->a5-b2
     a_type = "abcdef".indexOf(s.charAt(0));
     a_state_pre = "0123456789".indexOf(s.charAt(1));
-    bonded_pre = (s.charAt(2)=='-');
+    bonded_pre = ("-+".indexOf(s.charAt(2))==0);
     b_type = "abcdef".indexOf(s.charAt(3));
     b_state_pre = "0123456789".indexOf(s.charAt(4));
     a_state_post = "0123456789".indexOf(s.charAt(8));
-    bonded_post = (s.charAt(9)=='-');
+    bonded_post = ("-+".indexOf(s.charAt(9))==0);
     b_state_post = "0123456789".indexOf(s.charAt(11));
   }
 }
