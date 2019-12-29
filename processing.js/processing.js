@@ -14044,6 +14044,9 @@ module.exports = function setupParser(Processing, options) {
       if (localStorage[filename]) {
         return localStorage[filename].split("\n");
       }
+      else {
+        return null;
+      }
 
       var filecontent = ajax(filename);
       if(typeof filecontent !== "string" || filecontent === "") {
