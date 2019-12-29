@@ -28,13 +28,13 @@ void drawSettingsMode()
   // need to set these here too for textHeight
   setTextSize(30*pix);
   textAlign(LEFT,TOP);
-  
+
   String challenge_text = "Challenge "+str(iChallenge+1)+": \""+challenges[iChallenge].title+"\"\n\n" +
     challenges[iChallenge].desc;
   if(challenges[iChallenge].desc2.length()>0)
     challenge_text += "\n\n" + challenges[iChallenge].desc2;
   if(challenges[iChallenge].min_reactions_required>0)
-    challenge_text += "\n\n(A good solution might require " + 
+    challenge_text += "\n\n(A good solution might require " +
       ((challenges[iChallenge].min_reactions_required>1)?
       ("as few as "+str(challenges[iChallenge].min_reactions_required)+" reactions.)"):
       "only one reaction.)");
@@ -56,7 +56,7 @@ void drawSettingsMode()
 
   drawAtomsMode();
 
-  // (need to re-set these in case changed in atoms mode drawing)  
+  // (need to re-set these in case changed in atoms mode drawing)
   setTextSize(30*pix);
   textAlign(LEFT,TOP);
 
@@ -124,12 +124,13 @@ void drawSettingsMode()
       reactions_start_y+reactions.size()*radius*3-radius-settings_dialog_scrollPos,
       70*pix,70*pix);
     add_reaction_rect.drawImage(add_image);
-
-    levels_rect = new Rect(dialog_border+radius*5.4,
-      reactions_start_y+reactions.size()*radius*3+radius*4-settings_dialog_scrollPos,
-      80*pix,80*pix);
-    levels_rect.drawImage(clipboard_image);
   }
+
+  levels_rect = new Rect(dialog_border+radius*5.4,
+    reactions_start_y+reactions.size()*radius*3+radius*4-settings_dialog_scrollPos,
+    80*pix,80*pix);
+  levels_rect.drawImage(clipboard_image);
+
   reload_rect = new Rect(dialog_border+radius*9.6,
     reactions_start_y+reactions.size()*radius*3+radius*4-settings_dialog_scrollPos,
     80*pix,80*pix);
@@ -148,13 +149,13 @@ void drawSettingsMode()
     float scroll_y = (height-scroll_height)*settings_dialog_scrollPos/excess_height;
     line(width-dialog_border+6*pix,scroll_y,width-dialog_border+6*pix,scroll_y+scroll_height);
   }
-  
+
   if(editing_reaction)
     showReactionEditor();
 
   if(showing_levels)
     showLevelChooser();
-  
+
   if(showing_settings_help)
     showSettingsHelp();
 
@@ -245,11 +246,11 @@ void mousePressedInSettingsMode()
   }
   else if(editing_reaction)
     mousePressedInReactionEditor();
-  else if(challenges[iChallenge].allow_editing_of_reactions && mouseY>reactions_start_y-settings_dialog_scrollPos-radius && 
-    mouseY<reactions_start_y+radius*3*reactions.size()-radius*2-settings_dialog_scrollPos && 
+  else if(challenges[iChallenge].allow_editing_of_reactions && mouseY>reactions_start_y-settings_dialog_scrollPos-radius &&
+    mouseY<reactions_start_y+radius*3*reactions.size()-radius*2-settings_dialog_scrollPos &&
     mouseX<dialog_border+radius*13) // click on a reaction
   {
-    editing_reaction=true; 
+    editing_reaction=true;
     i_reaction_being_edited = int((mouseY - (reactions_start_y-settings_dialog_scrollPos-radius)) / (radius*3));
   }
   else if(challenges[iChallenge].allow_editing_of_reactions && reactions.size()>0 && delete_all_reactions_rect.contains(mouseX,mouseY))
@@ -262,7 +263,7 @@ void mousePressedInSettingsMode()
     editing_reaction=true;
     i_reaction_being_edited = reactions.size()-1;
   }
-  else if(challenges[iChallenge].allow_editing_of_reactions && levels_rect.contains(mouseX,mouseY))
+  else if(levels_rect.contains(mouseX,mouseY))
   {
     showing_levels = true;
     i_challenge_being_shown = iChallenge;
@@ -283,7 +284,7 @@ void mousePressedInSettingsMode()
   else if(excess_height>0)
   {
     // start dragging the dialog contents up and down
-    is_dragging_settings_dialog = true;  
+    is_dragging_settings_dialog = true;
     dragged_settings_dialog_y = mouseY;
   }
 }
