@@ -233,8 +233,8 @@ class MessagePassingChallenge extends Challenge {
   void init() 
   {
     int n_v = ceil((atoms_area.height-R*2)/(2*R))+1;
-    int n_chains = ceil((n_v-2)/3)+1;
-    atoms = new Atom[n_v-n_chains+n_chains*7+2];
+    int n_chains = (n_v-(n_v%3))/3;
+    atoms = new Atom[n_v+n_chains*6+2];
     int j=0;
     for(int i=0;i<n_v;i++)
     {
