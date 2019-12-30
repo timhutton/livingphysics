@@ -1,7 +1,7 @@
 Living Physics
 ==============
 
-Artificial chemistry game. Live version: https://timhutton.github.io/livingphysics/
+Artificial chemistry game. Live version: https://timhutton.github.io/livingphysics/  <-- CLICK TO PLAY
 
 <a href="https://timhutton.github.io/livingphysics/"><img width="200px" src="https://user-images.githubusercontent.com/647092/69833661-3b8ac580-122d-11ea-95a8-a17bb135854a.png"></img></a>
 
