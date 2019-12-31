@@ -1,4 +1,4 @@
-int dialog_border;
+int dialog_border_left, dialog_border_right;
 boolean is_dragging_settings_dialog = false;
 int dragged_settings_dialog_y;
 float settings_dialog_scrollPos = 0;
@@ -39,9 +39,10 @@ void drawSettingsMode()
       ("as few as "+str(challenges[iChallenge].min_reactions_required)+" reactions.)"):
       "only one reaction.)");
 
-  dialog_border = int(40*pix);
+  dialog_border_left = int(20*pix);
+  dialog_border_right = int(60*pix);
   radius = 22*pix;
-  final float challenge_text_height = textHeight(challenge_text,width-dialog_border*2-20*pix)+10*pix;
+  final float challenge_text_height = textHeight(challenge_text,width-dialog_border_left-dialog_border_right-20*pix)+10*pix;
   float reactions_y = challenge_text_height+40*pix;
   reactions_start_y = reactions_y+60*pix;
   float panel_height = reactions_start_y + reactions.size()*radius*3+radius*8;
@@ -64,27 +65,26 @@ void drawSettingsMode()
   stroke(230,140,100);
   strokeWeight(1*pix);
   fill(0,0,0,MY_ALPHA);
-  rect(dialog_border,-2*pix,width-dialog_border*2,height+4*pix);
+  rect(dialog_border_left,-2*pix,width-dialog_border_left-dialog_border_right,height+4*pix);
 
   // show the challenge text
   fill(255,255,255,MY_ALPHA);
-  drawText(challenge_text,dialog_border+10*pix,10*pix-settings_dialog_scrollPos,width-dialog_border*2-20*pix);
+  drawText(challenge_text,dialog_border_left+10*pix,10*pix-settings_dialog_scrollPos,width-dialog_border_left-dialog_border_right-20*pix);
 
   // show the reactions
-  float p1=dialog_border+radius*1.5;
-  float p2=dialog_border+radius*4.5;
-  float p3=dialog_border+radius*9;
-  float p4=dialog_border+radius*12;
-  float p5=dialog_border+radius*6;
-  float p6=dialog_border+radius*7.5;
+  float p1=dialog_border_left+radius*1.5;
+  float p2=dialog_border_left+radius*4.5;
+  float p3=dialog_border_left+radius*9;
+  float p4=dialog_border_left+radius*12;
+  float p5=dialog_border_left+radius*6;
+  float p6=dialog_border_left+radius*7.5;
   noStroke();
   fill(50,50,50,MY_ALPHA);
-  rect(dialog_border+5*pix,reactions_start_y-radius*3.5-settings_dialog_scrollPos,
-  p4-p1+radius*3,reactions.size()*radius*3+radius*6.5);
+  rect(dialog_border_left+5*pix,reactions_start_y-radius*3.5-settings_dialog_scrollPos,p4-p1+radius*3,reactions.size()*radius*3+radius*6.5);
   setTextSize(30*pix);
   textAlign(LEFT,TOP);
   fill(255,255,255,MY_ALPHA);
-  text("Reactions:",dialog_border+10*pix,reactions_y-settings_dialog_scrollPos);
+  text("Reactions:",dialog_border_left+10*pix,reactions_y-settings_dialog_scrollPos);
   for(int i=0;i<reactions.size();i++)
   {
     float y = reactions_start_y+i*radius*3-settings_dialog_scrollPos;
@@ -106,7 +106,7 @@ void drawSettingsMode()
     drawAnAtom(p4,y,radius,r.b_type,r.b_state_post,MY_ALPHA);
   }
 
-  help_with_level_rect = new Rect(dialog_border+radius*1,
+  help_with_level_rect = new Rect(dialog_border_left+radius*1,
     reactions_start_y+reactions.size()*radius*3+radius*4-settings_dialog_scrollPos,
     80*pix,80*pix);
   help_with_level_rect.drawImage(help_image);
@@ -115,30 +115,33 @@ void drawSettingsMode()
   {
     if(reactions.size()>0)
     {
-      delete_all_reactions_rect = new Rect(dialog_border+radius*1,
+      delete_all_reactions_rect = new Rect(dialog_border_left+radius*1,
         reactions_start_y+reactions.size()*radius*3-radius-settings_dialog_scrollPos,
         70*pix,70*pix);
       delete_all_reactions_rect.drawImage(trashcan_image);
     }
-    add_reaction_rect = new Rect(dialog_border+radius*6,
+    add_reaction_rect = new Rect(dialog_border_left+radius*6,
       reactions_start_y+reactions.size()*radius*3-radius-settings_dialog_scrollPos,
       70*pix,70*pix);
     add_reaction_rect.drawImage(add_image);
   }
 
-  levels_rect = new Rect(dialog_border+radius*5.4,
+  levels_rect = new Rect(dialog_border_left+radius*5.4,
     reactions_start_y+reactions.size()*radius*3+radius*4-settings_dialog_scrollPos,
     80*pix,80*pix);
   levels_rect.drawImage(clipboard_image);
 
-  reload_rect = new Rect(dialog_border+radius*9.6,
+  reload_rect = new Rect(dialog_border_left+radius*9.6,
     reactions_start_y+reactions.size()*radius*3+radius*4-settings_dialog_scrollPos,
     80*pix,80*pix);
   reload_rect.drawImage(reload_image);
-  done_editing_reactions_rect = new Rect(dialog_border+radius*14,
+  done_editing_reactions_rect = new Rect(dialog_border_left+radius*14,
     reactions_start_y+reactions.size()*radius*3+radius*4-settings_dialog_scrollPos,
     80*pix,80*pix);
   done_editing_reactions_rect.drawImage(tick_image);
+
+  scroll_up_rect = new Rect(width-50*pix,0,50*pix,50*pix);
+  scroll_down_rect = new Rect(width-50*pix,height-50*pix,50*pix,50*pix);
 
   if(excess_height>0)
   {
@@ -147,7 +150,9 @@ void drawSettingsMode()
     strokeWeight(3*pix);
     float scroll_height = height*height/panel_height;
     float scroll_y = (height-scroll_height)*settings_dialog_scrollPos/excess_height;
-    line(width-dialog_border+6*pix,scroll_y,width-dialog_border+6*pix,scroll_y+scroll_height);
+    line(width-dialog_border_right+6*pix,scroll_y,width-dialog_border_right+6*pix,scroll_y+scroll_height);
+    scroll_up_rect.drawImage(move_up_image);
+    scroll_down_rect.drawImage(move_down_image);
   }
 
   if(editing_reaction)
@@ -248,7 +253,7 @@ void mousePressedInSettingsMode()
     mousePressedInReactionEditor();
   else if(challenges[iChallenge].allow_editing_of_reactions && mouseY>reactions_start_y-settings_dialog_scrollPos-radius &&
     mouseY<reactions_start_y+radius*3*reactions.size()-radius*2-settings_dialog_scrollPos &&
-    mouseX<dialog_border+radius*13) // click on a reaction
+    mouseX<dialog_border_left+radius*13) // click on a reaction
   {
     editing_reaction=true;
     i_reaction_being_edited = int((mouseY - (reactions_start_y-settings_dialog_scrollPos-radius)) / (radius*3));
@@ -280,6 +285,14 @@ void mousePressedInSettingsMode()
   else if(help_with_level_rect.contains(mouseX,mouseY))
   {
     showing_settings_help = true;
+  }
+  else if(scroll_up_rect.contains(mouseX,mouseY))
+  {
+    settings_dialog_scrollPos -= scroll_step;
+  }
+  else if(scroll_down_rect.contains(mouseX,mouseY))
+  {
+    settings_dialog_scrollPos += scroll_step;
   }
   else if(excess_height>0)
   {

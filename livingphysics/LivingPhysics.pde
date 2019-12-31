@@ -1,4 +1,4 @@
-/* @pjs preload="livingphysics/data/add2.png,livingphysics/data/cancel2.png,livingphysics/data/checkbox_ticked.png,livingphysics/data/clipboard2.png,livingphysics/data/cog3.png,livingphysics/data/help.png,livingphysics/data/icon-32.png,livingphysics/data/icon-48.png,livingphysics/data/icon-72.png,livingphysics/data/icon-128.png,livingphysics/data/move_left2.png,livingphysics/data/move_right2.png,livingphysics/data/reload2.png,livingphysics/data/tick2.png,livingphysics/data/trashcan2.png"; */
+/* @pjs preload="livingphysics/data/add2.png,livingphysics/data/cancel2.png,livingphysics/data/checkbox_ticked.png,livingphysics/data/clipboard2.png,livingphysics/data/cog3.png,livingphysics/data/help.png,livingphysics/data/icon-32.png,livingphysics/data/icon-48.png,livingphysics/data/icon-72.png,livingphysics/data/icon-128.png,livingphysics/data/move_left2.png,livingphysics/data/move_right2.png,livingphysics/data/move_up.png,livingphysics/data/move_down.png,livingphysics/data/reload2.png,livingphysics/data/tick2.png,livingphysics/data/trashcan2.png"; */
 // (processing.js requires this)
 
 /*
@@ -82,6 +82,7 @@ ArrayList reactions;
 boolean isDragging;
 int iAtomBeingDragged;
 boolean is_settings_mode;
+int scroll_step;
 Challenge challenges[];
 int iChallenge;
 boolean succeeded,cheating_detected;
@@ -96,17 +97,18 @@ float pix;
 float R;
 PImage cog_image,tick_image,add_image,
   trashcan_image,cancel_image,reload_image,icon_image,clipboard_image,
-  move_left_image,move_right_image,checkbox_ticked_image,help_image;
+  move_left_image,move_right_image,move_up_image,move_down_image,
+  checkbox_ticked_image,help_image;
 Rect cog_rect,help_rect;
 String website_url;
-
-final boolean is_js_version = true;
 
 void setup()
 {
   // scale to be 480x800 proportionally as large as possible
   pix = min(window.innerWidth/480, window.innerHeight/800);
   size(480*pix, 800*pix);
+
+  scroll_step = 50*pix;
 
   PFont my_font = createFont("SansSerif",32,true);
   textFont(my_font);
@@ -129,6 +131,8 @@ void setup()
   clipboard_image = loadImage("livingphysics/data/clipboard2.png");
   move_left_image = loadImage("livingphysics/data/move_left2.png");
   move_right_image = loadImage("livingphysics/data/move_right2.png");
+  move_up_image = loadImage("livingphysics/data/move_up.png");
+  move_down_image = loadImage("livingphysics/data/move_down.png");
   checkbox_ticked_image = loadImage("livingphysics/data/checkbox_ticked.png");
   help_image = loadImage("livingphysics/data/help.png");
   events = new ArrayList();

@@ -5,8 +5,10 @@ boolean is_dragging_settings_help_dialog = false;
 
 void showSettingsHelp()
 {
-  float left = 40*pix;
-  float right = width-left;
+  int dialog_border_left = int(20*pix);
+  int dialog_border_right = int(60*pix);
+  float left = dialog_border_left;
+  float right = width-dialog_border_right;
   float top = -1;
   float bottom = height-top;
   float internal_border = 5*pix;
@@ -23,6 +25,8 @@ void showSettingsHelp()
       "You can dismiss the panel (and this one) with the tick button.";
   
   settings_help_ok_button_rect = new Rect((left+right)/2-40*pix,bottom-90*pix,80*pix,80*pix);
+  scroll_up_rect = new Rect(width-50*pix,0,50*pix,50*pix);
+  scroll_down_rect = new Rect(width-50*pix,height-50*pix,50*pix,50*pix);
   setTextSize(28*pix);
   float text_height = textHeight(text_block1,right-left-internal_border*2);
   float y1 = settings_help_ok_button_rect.y-internal_border*4;
@@ -66,6 +70,8 @@ void showSettingsHelp()
     float scroll_height = height*height/panel_height;
     float scroll_y = (height-scroll_height)*settings_help_scroll_pos/settings_help_excess_height;
     line(right+6*pix,scroll_y,right+6*pix,scroll_y+scroll_height);
+    scroll_up_rect.drawImage(move_up_image);
+    scroll_down_rect.drawImage(move_down_image);
   }
 }
 
@@ -75,6 +81,14 @@ void mousePressedInSettingsHelpMode()
   if(settings_help_ok_button_rect.contains(mouseX,mouseY))
   {
     showing_settings_help = false;
+  }
+  else if(scroll_up_rect.contains(mouseX,mouseY))
+  {
+    settings_help_scroll_pos -= scroll_step;
+  }
+  else if(scroll_down_rect.contains(mouseX,mouseY))
+  {
+    settings_help_scroll_pos += scroll_step;
   }
   // otherwise start scrolling
   else if(settings_help_excess_height>0)
