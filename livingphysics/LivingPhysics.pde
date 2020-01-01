@@ -324,14 +324,14 @@ void drawSuccess()
   if(moreChallengesRemaining)
   {
     image(tick_image,width/2-30*pix,bottom-10-60*pix,60*pix,60*pix);
-    drawText("You did it!\n\nChallenge "+str(iSolvedChallenge+1)+" completed. Click to start the next challenge.",
-      left+10,top+40,right-left-20);
+    text("You did it!\n\nChallenge "+str(iSolvedChallenge+1)+" completed. Click to start the next challenge.",
+      left+10,top+40,right-left-20,MAX_INT);
   }
   else
   {
     String message = "You solved all the challenges!\n\nYou are awesome.";
     iChallenge = (iSolvedChallenge+1)%challenges.length;
-    drawText(message,left+10,top+40,right-left-20);
+    text(message,left+10,top+40,right-left-20,MAX_INT);
   }
 }
 
@@ -397,7 +397,7 @@ void drawSplashScreen()
   noFill();
   setTextSize(30*pix);
   textAlign(CENTER,TOP);
-  drawText("Living Physics",50*pix,300*pix,width-100*pix);
+  text("Living Physics",50*pix,300*pix,width-100*pix,MAX_INT);
   setTextSize(24*pix);
 }
 
@@ -478,7 +478,7 @@ void drawCheatingDetected()
   image(reload_image,width/2-30*pix,bottom-90*pix,80*pix,80*pix);
   setTextSize(32*pix);
   textAlign(CENTER,TOP);
-  drawText(challenges[iChallenge].cheating_message,left+10*pix,top+10*pix,right-left-20*pix);
+  text(challenges[iChallenge].cheating_message,left+10*pix,top+10*pix,right-left-20*pix,MAX_INT);
 }
 
 void mousePressedInCheatingDetectedMode()

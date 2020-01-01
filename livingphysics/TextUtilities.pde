@@ -1,11 +1,16 @@
-boolean isWhitespace(char c)
+boolean isWhitespace(int c)
 {
-  return c==' '; // Processing's text() doesn't seem to recognise \t as whitespace at all
+  return c==32;
+}
+
+boolean isNewline(int c)
+{
+  return c==13 || c==10;
 }
 
 int textTool(String message,float x,float y,float box_width,boolean draw_text)
 {
-  final float leading = 1.3; // could be a parameter
+  final float leading = 1.2; // could be a parameter
   int line_begin = 0;
   int line_end = 0;
   int text_height = 0;
@@ -16,7 +21,7 @@ int textTool(String message,float x,float y,float box_width,boolean draw_text)
     // add characters to the current line until it overflows or we reach the end of the text or a newline
     while(line_end<message.length())
     {
-      char c = message.charAt(line_end);
+      int c = message.charCodeAt(line_end);
       // skip whitespace at the beginning of the line (except on the first line)
       if(text_height>0 && line_end==line_begin && isWhitespace(c))
       {
@@ -24,12 +29,12 @@ int textTool(String message,float x,float y,float box_width,boolean draw_text)
         line_end++;
         continue;
       }
-      if(c=='\n')
+      if(isNewline(c))
       {
         line_end++;
         break; 
       }
-      if(textWidth(message.substring(line_begin,line_end+1))>box_width)
+      if(textWidth(message.substring(line_begin,line_end+1))>box_width-5)
       {
         overflowed = true;
         break;
@@ -43,7 +48,7 @@ int textTool(String message,float x,float y,float box_width,boolean draw_text)
       // roll back to before the last word
       while(line_end>line_begin) // (just a safety check)
       {
-        char c = message.charAt(line_end);
+        int c = message.charCodeAt(line_end);
         if(isWhitespace(c))
           break;
         line_end--;
@@ -51,12 +56,11 @@ int textTool(String message,float x,float y,float box_width,boolean draw_text)
     }
     // this line is finished
     if(draw_text)
-      text(message.substring(line_begin,line_end),x,y+text_height);//,box_width,height);
+      text(message.substring(line_begin,line_end),x,y+text_height);
     line_begin = line_end;
-    text_height += (textAscent()+textDescent())*leading; //g.textLeading;
+    text_height += (textAscent()+textDescent())*leading;
   } while(line_begin<message.length());
 
-  text_height *= 2.5; // hacked to fix layout
   return text_height;
 }
 
@@ -67,8 +71,9 @@ int textHeight(String message,float box_width)
 
 void drawText(String message,float x,float y,float box_width)
 {
-  text(message,x,y,box_width,MAX_INT);
-  //textTool(message,x,y,box_width,true);
+  //text(message,x,y,box_width,MAX_INT); // to debug, can draw both to check they line up
+  //fill(200,100,100);
+  textTool(message,x,y,box_width,true); // using our own text drawing function in order to get a reliable textHeight
 }
 
 void setTextSize(float s)

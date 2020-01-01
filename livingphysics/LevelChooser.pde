@@ -37,20 +37,21 @@ void showLevelChooser()
   fill(255,255,255,MY_ALPHA);
   if(i_challenge_being_shown>=0 && i_challenge_being_shown<challenges.length)
   {
-    drawText("Challenge "+str(i_challenge_being_shown+1)+": \""+challenges[i_challenge_being_shown].title+"\"\n\n"+challenges[i_challenge_being_shown].desc,
-      levels_window.x+75*pix,levels_window.y+10*pix,levels_window.width-150*pix);
+    text("Challenge "+str(i_challenge_being_shown+1)+": \""+challenges[i_challenge_being_shown].title+"\"\n\n"+challenges[i_challenge_being_shown].desc,
+      levels_window.x+75*pix,levels_window.y+10*pix,levels_window.width-150*pix,MAX_INT);
     if(challenges[i_challenge_being_shown].isSolved())
     {
       image(checkbox_ticked_image,width/2-60*pix,levels_window.y+1*pix+levels_window.height-80*pix-80*pix,
         60*pix,60*pix);
       textAlign(LEFT,CENTER);
-      text("Solved",width/2+25*pix,levels_window.y+1*pix+levels_window.height-80*pix-80*pix+30*pix);
+      text("Solved",width/2+25*pix,levels_window.y+1*pix+levels_window.height-80*pix-80*pix+30*pix,MAX_INT);
     }
   }
   else
   {
     fill(200,200,200,MY_ALPHA);
-    drawText("To suggest ideas for more levels, or to discuss solutions or report bugs, please visit the Living Physics community webpage - tap the tick button.",levels_window.x+75*pix,levels_window.y+55*pix,levels_window.width-150*pix);
+    text("To suggest ideas for more levels, or to discuss solutions or report bugs, please visit the Living Physics community webpage - tap the tick button.",
+      levels_window.x+75*pix,levels_window.y+55*pix,levels_window.width-150*pix,MAX_INT);
   }
 }
 

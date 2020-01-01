@@ -200,7 +200,7 @@ void drawAnAtom(float x,float y,float r,int type,int state,int opacity)
     noStroke();
     setTextSize(r*1.5);
     textAlign(CENTER,CENTER);
-    text(str(state),x,y);
+    text(str(state),x,y,MAX_INT);
   }
 }
 
