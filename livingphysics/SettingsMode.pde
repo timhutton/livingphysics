@@ -237,6 +237,7 @@ void mousePressedInSettingsMode()
     else if(nearerThan(mouseX-(width/2+140*pix-40*pix),mouseY-(300*pix+40*pix),45*pix)) // tick
     {
       asking_can_reload_challenge=false;
+      saveReactions();
       reloadChallengeKeepingExistingReactions();
       is_settings_mode = false;
     }
