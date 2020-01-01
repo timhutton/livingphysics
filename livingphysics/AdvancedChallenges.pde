@@ -1129,15 +1129,13 @@ class MitosisChallenge extends Challenge {
   MitosisChallenge() {
     id = "mitosis";
     title = "Mitosis";
-    desc = "Divide the loop into two separate loops.";
+    desc = "Divide the loop into two separate loops. Keep the red atoms inside.";
     desc2 = "You can use the two state 2 atoms if you want.";
     min_reactions_required = 8;
   }
   void init() 
   {
-    final int s[] = {
-      0,2,3,4,5
-    }; // anything but yellow
+    // make a loop of yellow atoms
     final int N = 20;
     atoms = new Atom[N+8];
     float radius = min(atoms_area.width/2,N*2*R/TWO_PI);
@@ -1149,10 +1147,15 @@ class MitosisChallenge extends Challenge {
     }
     for(int i=0;i<N;i++)
       atoms[i].makeBond(atoms[(i+1)%N]);
-    for(int i=N;i<atoms.length;i++)
+    // put two red atoms inside
+    atoms[N] = new Atom(atoms_area.width/2,atoms_area.height/2-R,N,0,0,atoms);
+    atoms[N+1] = new Atom(atoms_area.width/2,atoms_area.height/2+R,N+1,0,0,atoms);
+    // scatter some other atoms
+    final int s[] = { 2,3,4,5 }; // anything but yellow or red
+    for(int i=N+2;i<atoms.length;i++)
     {
       PVector pos = findAClearPlaceForAtom();
-      atoms[i] = new Atom(pos.x,pos.y,i,s[i%5],0,atoms);
+      atoms[i] = new Atom(pos.x,pos.y,i,s[i%4],0,atoms);
     }
   }
   void evaluateSuccess() 
@@ -1181,6 +1184,36 @@ class MitosisChallenge extends Challenge {
     }
     if(n_groups==2 && n_total==20)
       succeeded = true;
+  }
+  void detectCheating()
+  {
+    // check that each red atom is within the bounding box of at least one of the connected groups of yellow atoms
+    // (this is a weak check but better than nothing)
+    Atom red1 = atoms[20];
+    Atom red2 = atoms[21];
+    boolean red1_inside = false;
+    boolean red2_inside = false;
+    for(int i=0;i<atoms.length;i++)
+    {
+      if(atoms[i].type==1)
+      {
+        ArrayList connected = getAllConnectedAtomsOfType(atoms[i],1);
+        if(AtomInBoundingBox(red1, connected))
+        {
+            red1_inside = true;
+        }
+        if(AtomInBoundingBox(red2, connected))
+        {
+            red2_inside = true;
+        }
+      }
+    }
+    if(!red1_inside || !red2_inside)
+    {
+      cheating_detected = true;
+      cheating_message = "The two red atoms should be kept inside. Try again.";
+      return;
+    }
   }
 }
 
