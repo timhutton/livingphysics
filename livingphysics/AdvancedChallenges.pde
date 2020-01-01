@@ -808,6 +808,17 @@ class FilterChallenge extends Challenge {
     if(!chain.contains(atoms[1])) return;
     succeeded = true;
   }
+  void detectCheating()
+  {
+    // are atoms 0 and 1 connected?
+    ArrayList chain = getAllAtomsConnectedTo(atoms[0]);
+    if(!chain.contains(atoms[1]))
+    {
+      cheating_detected = true;
+      cheating_message = "Keep the chain connected at all times. Try again.";
+      return;
+    }
+  }
 }
 
 //---------------------------------------------------
