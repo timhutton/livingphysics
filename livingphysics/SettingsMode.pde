@@ -210,7 +210,7 @@ void showMessage(String message,int MY_ALPHA)
   fill(0,0,0,MY_ALPHA);
   rect(h_border,v_border,dlg_width,dlg_height);
   fill(255,255,255,MY_ALPHA);
-  drawText(message,h_border+internal_border,v_border+10*pix,dlg_width-internal_border*2);
+  text(message,h_border+internal_border,v_border+10*pix,dlg_width-internal_border*2,MAX_INT);
   image(tick_image,width/2-40*pix,height-v_border-90*pix,80*pix,80*pix);
 }
 
