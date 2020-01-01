@@ -1,3 +1,9 @@
+// Level 0: Intro: no reactions needed, just pulling
+// Level 1: Easy: needs one or two reactions, no pitfalls
+// Level 2: Medium: up to three reactions, possible to make mistakes
+// Level 3: Hard: needs a sequence of reactions
+// Level 4: Fiendish: solution not obvious, needs experimentation and thought
+
 Challenge full_version_challenges[] = {
   new UnzipChallenge(), // 3
   new InsertChallenge(), // 3
@@ -7,13 +13,13 @@ Challenge full_version_challenges[] = {
   new GrowMembraneChallenge(), // 3.5
   new PullingChallenge(), // 3.5
   new ConcertinaChallenge(), // 3.5
+  new MitosisChallenge(), // 3.5
   new LadderFromRungsChallenge(), // 3.5
   new RollChallenge(), // 3.6
-  new FilterChallenge(), // 4
   new PeristalsisChallenge(), // 4
-  new EatChallenge(), // 4
-  new MatchChallenge(), // 4
-  new MitosisChallenge(), // 4
+  new EatChallenge(), // 4.1
+  new MatchChallenge(), // 4.2
+  new FilterChallenge(), // 4.5
 };
 
 class UnzipChallenge extends Challenge {
