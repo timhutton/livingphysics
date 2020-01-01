@@ -64,11 +64,11 @@ void drawSettingsMode()
   // draw the dialog outline
   stroke(230,140,100);
   strokeWeight(1*pix);
-  fill(0,0,0,MY_ALPHA);
+  fill(0,0,0,GLOBAL_ALPHA);
   rect(dialog_border_left,-2*pix,width-dialog_border_left-dialog_border_right,height+4*pix);
 
   // show the challenge text
-  fill(255,255,255,MY_ALPHA);
+  fill(255,255,255,GLOBAL_ALPHA);
   drawText(challenge_text,dialog_border_left+10*pix,10*pix-settings_dialog_scrollPos,width-dialog_border_left-dialog_border_right-20*pix);
 
   // show the reactions
@@ -79,31 +79,31 @@ void drawSettingsMode()
   float p5=dialog_border_left+radius*6;
   float p6=dialog_border_left+radius*7.5;
   noStroke();
-  fill(50,50,50,MY_ALPHA);
+  fill(50,50,50,GLOBAL_ALPHA);
   rect(dialog_border_left+5*pix,reactions_start_y-radius*3.5-settings_dialog_scrollPos,p4-p1+radius*3,reactions.size()*radius*3+radius*6.5);
   setTextSize(30*pix);
   textAlign(LEFT,TOP);
-  fill(255,255,255,MY_ALPHA);
+  fill(255,255,255,GLOBAL_ALPHA);
   text("Reactions:",dialog_border_left+10*pix,reactions_y-settings_dialog_scrollPos);
   for(int i=0;i<reactions.size();i++)
   {
     float y = reactions_start_y+i*radius*3-settings_dialog_scrollPos;
     Reaction r = (Reaction)reactions.get(i);
     noStroke();
-    fill(0,0,0,MY_ALPHA);
+    fill(0,0,0,GLOBAL_ALPHA);
     rect(p1-radius*1.1,y-radius*1.1,
     (p4+radius*1.1)-(p1-radius*1.1),radius*1.1*2);
-    stroke(200,200,200,MY_ALPHA);
+    stroke(200,200,200,GLOBAL_ALPHA);
     strokeWeight(6*pix);
-    if(r.bonded_pre) line(p1,y,p2,y);
-    if(r.bonded_post) line(p3,y,p4,y);
+    if(r.bonded_pre) line(p1+radius,y,p2-radius,y);
+    if(r.bonded_post) line(p3+radius,y,p4-radius,y);
     line(p5,y,p6,y);
     line(p6-10*pix,y-10*pix,p6,y);
     line(p6-10*pix,y+10*pix,p6,y);
-    drawAnAtom(p1,y,radius,r.a_type,r.a_state_pre,MY_ALPHA);
-    drawAnAtom(p2,y,radius,r.b_type,r.b_state_pre,MY_ALPHA);
-    drawAnAtom(p3,y,radius,r.a_type,r.a_state_post,MY_ALPHA);
-    drawAnAtom(p4,y,radius,r.b_type,r.b_state_post,MY_ALPHA);
+    drawAnAtom(p1,y,radius,r.a_type,r.a_state_pre,ATOMS_ALPHA);
+    drawAnAtom(p2,y,radius,r.b_type,r.b_state_pre,ATOMS_ALPHA);
+    drawAnAtom(p3,y,radius,r.a_type,r.a_state_post,ATOMS_ALPHA);
+    drawAnAtom(p4,y,radius,r.b_type,r.b_state_post,ATOMS_ALPHA);
   }
 
   help_with_level_rect = new Rect(dialog_border_left+radius*1,
@@ -146,7 +146,7 @@ void drawSettingsMode()
   if(excess_height>0)
   {
     // show the scroll position
-    stroke(200,200,200,MY_ALPHA);
+    stroke(200,200,200,GLOBAL_ALPHA);
     strokeWeight(3*pix);
     float scroll_height = height*height/panel_height;
     float scroll_y = (height-scroll_height)*settings_dialog_scrollPos/excess_height;
@@ -165,33 +165,33 @@ void drawSettingsMode()
     showSettingsHelp();
 
   if(asking_can_delete_reaction)
-    showYesNoQuestion("Delete this reaction?",MY_ALPHA);
+    showYesNoQuestion("Delete this reaction?",GLOBAL_ALPHA);
   if(asking_can_delete_all_reactions)
-    showYesNoQuestion("Delete all reactions?",MY_ALPHA);
+    showYesNoQuestion("Delete all reactions?",GLOBAL_ALPHA);
   if(asking_can_reload_challenge)
-    showYesNoQuestion("Restart this challenge?",MY_ALPHA);
+    showYesNoQuestion("Restart this challenge?",GLOBAL_ALPHA);
   if(showing_message)
-    showMessage(message_being_shown,MY_ALPHA);
+    showMessage(message_being_shown,GLOBAL_ALPHA);
 }
 
-void showYesNoQuestion(String message,int MY_ALPHA)
+void showYesNoQuestion(String message,int GLOBAL_ALPHA)
 {
   noStroke();
-  fill(0,0,0,MY_ALPHA);
+  fill(0,0,0,GLOBAL_ALPHA);
   rect(0,0,width,height);
   stroke(230,140,100);
   strokeWeight(1*pix);
-  fill(0,0,0,MY_ALPHA);
+  fill(0,0,0,GLOBAL_ALPHA);
   rect(50*pix,200*pix,width-100*pix,220*pix);
   setTextSize(30*pix);
   textAlign(CENTER,TOP);
-  fill(255,255,255,MY_ALPHA);
+  fill(255,255,255,GLOBAL_ALPHA);
   text(message,width/2,220*pix);
   image(cancel_image,width/2-140*pix,300*pix,80*pix,80*pix);
   image(tick_image,width/2+140*pix-80*pix,300*pix,80*pix,80*pix);
 }
 
-void showMessage(String message,int MY_ALPHA)
+void showMessage(String message,int GLOBAL_ALPHA)
 {
   // decide how high the box needs to be
   setTextSize(30*pix);
@@ -203,13 +203,13 @@ void showMessage(String message,int MY_ALPHA)
   float dlg_height = ht+100*pix;
   float v_border = (height-dlg_height)/2;
   noStroke();
-  fill(0,0,0,MY_ALPHA);
+  fill(0,0,0,GLOBAL_ALPHA);
   rect(0,0,width,height);
   stroke(230,140,100);
   strokeWeight(1*pix);
-  fill(0,0,0,MY_ALPHA);
+  fill(0,0,0,GLOBAL_ALPHA);
   rect(h_border,v_border,dlg_width,dlg_height);
-  fill(255,255,255,MY_ALPHA);
+  fill(255,255,255,GLOBAL_ALPHA);
   text(message,h_border+internal_border,v_border+10*pix,dlg_width-internal_border*2,MAX_INT);
   image(tick_image,width/2-40*pix,height-v_border-90*pix,80*pix,80*pix);
 }

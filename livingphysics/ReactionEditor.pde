@@ -7,13 +7,13 @@ Rect reaction_editing_window;
 void showReactionEditor()
 {
   noStroke();
-  fill(0,0,0,MY_ALPHA);
+  fill(0,0,0,GLOBAL_ALPHA);
   rect(0,0,width,height);
   // draw the dialog outline
   reaction_editing_window = new Rect(0,height/2-200*pix,width-1,400*pix);
   stroke(230,140,100);
   strokeWeight(1*pix);
-  fill(0,0,0,MY_ALPHA);
+  fill(0,0,0,GLOBAL_ALPHA);
   reaction_editing_window.drawRect();
 
   editing_radius = 30*pix;
@@ -26,21 +26,21 @@ void showReactionEditor()
   float p6=editing_radius*9;
   float p3=editing_radius*10.5;
   float p4=editing_radius*14;
-  stroke(200,200,200,MY_ALPHA);
+  stroke(200,200,200,GLOBAL_ALPHA);
   strokeWeight(6*pix);
-  if(r.bonded_pre) line(p1,editing_y,p2,editing_y);
-  if(r.bonded_post) line(p3,editing_y,p4,editing_y);
+  if(r.bonded_pre) line(p1+editing_radius,editing_y,p2-editing_radius,editing_y);
+  if(r.bonded_post) line(p3+editing_radius,editing_y,p4-editing_radius,editing_y);
   line(p5,editing_y,p6,editing_y);
   line(p6-10*pix,editing_y-10*pix,p6,editing_y);
   line(p6-10*pix,editing_y+10*pix,p6,editing_y);
-  drawAnAtom(p1,editing_y,editing_radius,r.a_type,r.a_state_pre,MY_ALPHA);
-  drawAnAtom(p2,editing_y,editing_radius,r.b_type,r.b_state_pre,MY_ALPHA);
-  drawAnAtom(p3,editing_y,editing_radius,r.a_type,r.a_state_post,MY_ALPHA);
-  drawAnAtom(p4,editing_y,editing_radius,r.b_type,r.b_state_post,MY_ALPHA);
+  drawAnAtom(p1,editing_y,editing_radius,r.a_type,r.a_state_pre,ATOMS_ALPHA);
+  drawAnAtom(p2,editing_y,editing_radius,r.b_type,r.b_state_pre,ATOMS_ALPHA);
+  drawAnAtom(p3,editing_y,editing_radius,r.a_type,r.a_state_post,ATOMS_ALPHA);
+  drawAnAtom(p4,editing_y,editing_radius,r.b_type,r.b_state_post,ATOMS_ALPHA);
   if(i_atom_being_edited>=0)
   {
     noFill();
-    stroke(255,255,255,MY_ALPHA);
+    stroke(255,255,255,GLOBAL_ALPHA);
     strokeWeight(2*pix);
     switch(i_atom_being_edited) {
     case 0: 
@@ -57,9 +57,9 @@ void showReactionEditor()
       break;
     }
     for(int type=0;type<6;type++)
-      drawAnAtom(editing_radius*1.5 + editing_radius*2.55*type,editing_y+editing_radius*3,editing_radius,type,-1,MY_ALPHA);
+      drawAnAtom(editing_radius*1.5 + editing_radius*2.55*type,editing_y+editing_radius*3,editing_radius,type,-1,ATOMS_ALPHA);
     for(int state=0;state<10;state++)
-      drawAnAtom(editing_radius*1 + editing_radius*1.55*state,editing_y+editing_radius*6,editing_radius,-1,state,MY_ALPHA);
+      drawAnAtom(editing_radius*1 + editing_radius*1.55*state,editing_y+editing_radius*6,editing_radius,-1,state,ATOMS_ALPHA);
   }
 
   help_with_editing_reaction_rect = new Rect(editing_radius*2,editing_y+editing_radius*7.8,80*pix,80*pix);

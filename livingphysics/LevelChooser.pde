@@ -10,7 +10,7 @@ void showLevelChooser()
   Rect levels_window = new Rect(0,height/2-250*pix,width,500*pix);
   stroke(230,140,100);
   strokeWeight(1*pix);
-  fill(0,0,0,MY_ALPHA);
+  fill(0,0,0,GLOBAL_ALPHA);
   levels_window.drawRect();
   cancel_challenge_choice_rect = new Rect(width/2-60*pix-30*pix,levels_window.y+levels_window.height-70*pix,
     60*pix,60*pix);
@@ -18,7 +18,7 @@ void showLevelChooser()
   accept_challenge_choice_rect = new Rect(width/2+60*pix-30*pix,levels_window.y+levels_window.height-70*pix,
     60*pix,60*pix);
   accept_challenge_choice_rect.drawImage(tick_image);
-  fill(50,50,50,MY_ALPHA);
+  fill(50,50,50,GLOBAL_ALPHA);
   noStroke();
   rect(levels_window.x+65*pix,levels_window.y+1*pix,levels_window.width-130*pix,levels_window.height-80*pix);
   if(i_challenge_being_shown>=0)
@@ -34,7 +34,7 @@ void showLevelChooser()
   }
   setTextSize(25*pix);
   textAlign(CENTER,TOP);
-  fill(255,255,255,MY_ALPHA);
+  fill(255,255,255,GLOBAL_ALPHA);
   if(i_challenge_being_shown>=0 && i_challenge_being_shown<challenges.length)
   {
     text("Challenge "+str(i_challenge_being_shown+1)+": \""+challenges[i_challenge_being_shown].title+"\"\n\n"+challenges[i_challenge_being_shown].desc,
@@ -49,7 +49,7 @@ void showLevelChooser()
   }
   else
   {
-    fill(200,200,200,MY_ALPHA);
+    fill(200,200,200,GLOBAL_ALPHA);
     text("To suggest ideas for more levels, or to discuss solutions or report bugs, please visit the Living Physics community webpage - tap the tick button.",
       levels_window.x+75*pix,levels_window.y+55*pix,levels_window.width-150*pix,MAX_INT);
   }

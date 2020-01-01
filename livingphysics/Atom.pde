@@ -139,13 +139,23 @@ class Atom
     {
       Atom b = (Atom)bonds.get(j);
       if(b.id>=id) continue;
-      line(x,y,b.x,b.y);
+      drawBondWith(b);
     }
+  }
+  
+  void drawBondWith(Atom b)
+  {
+    bond_length = sqrt((x-b.x)*(x-b.x)+(y-b.y)*(y-b.y));
+    float sx = x + (b.x-x)*R/bond_length;
+    float sy = y + (b.y-y)*R/bond_length;
+    float ex = b.x + (x-b.x)*R/bond_length;
+    float ey = b.y + (y-b.y)*R/bond_length;
+    line(sx,sy,ex,ey);
   }
   
   void drawAtom()
   {
-    drawAnAtom(x,y,R,type,state,192);
+    drawAnAtom(x,y,R,type,state,ATOMS_ALPHA);
   }
   
   void makeBond(Atom b)
@@ -196,11 +206,20 @@ void drawAnAtom(float x,float y,float r,int type,int state,int opacity)
   }
   if(state>=0) // sometimes we don't want to show the state, use -1 for this
   {
-    fill(255,255,255,opacity);
+    fill(255,255,255);
     noStroke();
-    setTextSize(r*1.5);
     textAlign(CENTER,CENTER);
-    text(str(state),x,y,MAX_INT);
+    boolean show_type_label = false;
+    if(show_type_label && type>=0)
+    {
+      setTextSize(r);
+      text("abcdef"[type]+str(state),x,y,MAX_INT);
+    }
+    else
+    {
+      setTextSize(r*1.5);
+      text(str(state),x,y,MAX_INT);
+    }
   }
 }
 

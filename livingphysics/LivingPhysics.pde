@@ -89,7 +89,8 @@ boolean succeeded,cheating_detected;
 ArrayList events;
 Reaction last_reaction;
 int last_reaction_age;
-final int MY_ALPHA = 200;
+final int GLOBAL_ALPHA = 200;
+final int ATOMS_ALPHA = 192;
 
 boolean showing_atoms_area_help = false;
 
@@ -219,9 +220,9 @@ void drawAtomsMode()
   if(last_reaction!=null && last_reaction_age<last_reaction_display_time+last_reaction_fade_time)
   {
     last_reaction_age++;
-    int MY_ALPHA = 200;
+    int alpha = 200;
     if(last_reaction_age>last_reaction_display_time)
-      MY_ALPHA *= (last_reaction_display_time+last_reaction_fade_time-last_reaction_age)/last_reaction_fade_time;
+      alpha *= (last_reaction_display_time+last_reaction_fade_time-last_reaction_age)/last_reaction_fade_time;
     float y = (height+atoms_area.y+atoms_area.height)/2;
     float radius = 20*pix;
     float p1 = width/2-radius*(10.5/2);
@@ -230,17 +231,17 @@ void drawAtomsMode()
     float p4 = p3+radius*3;
     float p5 = p2+radius*1.5;
     float p6 = p3-radius*1.5;
-    stroke(200,200,200,MY_ALPHA);
+    stroke(200,200,200,alpha);
     strokeWeight(6*pix);
-    if(last_reaction.bonded_pre) line(p1,y,p2,y);
-    if(last_reaction.bonded_post) line(p3,y,p4,y);
+    if(last_reaction.bonded_pre) line(p1+radius,y,p2-radius,y);
+    if(last_reaction.bonded_post) line(p3+radius,y,p4-radius,y);
     line(p5,y,p6,y);
     line(p6-10*pix,y-10*pix,p6,y);
     line(p6-10*pix,y+10*pix,p6,y);
-    drawAnAtom(p1,y,radius,last_reaction.a_type,last_reaction.a_state_pre,MY_ALPHA);
-    drawAnAtom(p2,y,radius,last_reaction.b_type,last_reaction.b_state_pre,MY_ALPHA);
-    drawAnAtom(p3,y,radius,last_reaction.a_type,last_reaction.a_state_post,MY_ALPHA);
-    drawAnAtom(p4,y,radius,last_reaction.b_type,last_reaction.b_state_post,MY_ALPHA);
+    drawAnAtom(p1,y,radius,last_reaction.a_type,last_reaction.a_state_pre,alpha);
+    drawAnAtom(p2,y,radius,last_reaction.b_type,last_reaction.b_state_pre,alpha);
+    drawAnAtom(p3,y,radius,last_reaction.a_type,last_reaction.a_state_post,alpha);
+    drawAnAtom(p4,y,radius,last_reaction.b_type,last_reaction.b_state_post,alpha);
   }
   cog_rect.drawImage(cog_image);
   help_rect.drawImage(help_image);
