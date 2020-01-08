@@ -509,8 +509,6 @@ void loadReactions()
   if(reactions_as_strings == null)
     return; // fail silently (file may not exist, that's OK)
 
-  console.log('Loaded '+str(reactions_as_strings.length)+' reactions:'+reactions_as_strings);
-
   for(int i=0;i<reactions_as_strings.length;i++)
   {
     reactions.add(new Reaction(reactions_as_strings[i]));

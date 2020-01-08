@@ -756,7 +756,7 @@ class FilterChallenge extends Challenge {
     title = "Filter";
     desc = "Move all the red and green atoms to different sides of the chain.";
     desc2 = "Can you do it without relying on pulling the atoms into place?";
-    min_reactions_required = 9;
+    min_reactions_required = 19;
   }
   void init()
   {
