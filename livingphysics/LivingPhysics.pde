@@ -102,6 +102,7 @@ PImage cog_image,tick_image,add_image,
   checkbox_ticked_image,help_image;
 Rect cog_rect,help_rect;
 String website_url;
+int last_millis = 0;
 
 void setup()
 {
@@ -171,8 +172,15 @@ void draw()
   }
   else
   {
-    updateAtoms();
-    updateAtoms(); // more movement per frame redraw
+    // cope with adaptive framerate by doing more computation if more time has elapsed
+    int millis_now = millis();
+    int millis_elapsed = millis_now - last_millis;
+    last_millis = millis_now;
+    int target_millis = 8;
+    int n_steps = int(min(8, ceil(millis_elapsed / target_millis)));
+    for(int i=0;i<n_steps;i++) {
+      updateAtoms();
+    }
     drawAtomsMode();
     processEvents();
     if(frameCount%20==0)
@@ -245,12 +253,6 @@ void drawAtomsMode()
   }
   cog_rect.drawImage(cog_image);
   help_rect.drawImage(help_image);
-
-  // Show FPS
-  fill(200,200,200);
-  setTextSize(16*pix);
-  textAlign(LEFT,TOP);
-  drawText(str(int(frameRate))+" fps",5,5,400);
 }
 
 void mousePressed()
