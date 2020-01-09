@@ -14,7 +14,7 @@ void showAtomsAreaHelp()
   float internal_border = 5*pix;
   
   String text_block1 = "These are 'atoms', bouncing around in a two-dimensional world. You can drag them around with your finger.\n\n"+
-    "Atoms can be one of six colors, and have a 'state' - a number 0-9 that can change.\n\n"+
+    "Atoms can be one of six types, and have a 'state' - a number 0-9 that can change.\n\n"+
     "Atoms can become bonded to others, or unbonded. Bonding and state changing happens through 'reactions'.\n\n"+
     "A reaction occurs when two atoms with the appropriate color and state collide. The reaction that last occurred is shown at the bottom of the screen.\n\n"+
     "Your job is to edit the reactions to make things happen. Hit the cog button to see the current challenge and to edit the reactions.\n\n"+

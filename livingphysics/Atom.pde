@@ -195,6 +195,7 @@ class Atom
 
 void drawAnAtom(float x,float y,float r,int type,int state,int opacity)
 {
+   boolean show_type_label = true;
   if(type>=0) // sometimes we don't want to show the type, use -1 for this
   {
     final color[] atom_type_colors = { 0xff0000,0xffff00,0x00ff00,0x00ffff,0x0000ff,0xff00ff };
@@ -209,7 +210,6 @@ void drawAnAtom(float x,float y,float r,int type,int state,int opacity)
     fill(255,255,255);
     noStroke();
     textAlign(CENTER,CENTER);
-    boolean show_type_label = false;
     if(show_type_label && type>=0)
     {
       setTextSize(r);
@@ -220,6 +220,14 @@ void drawAnAtom(float x,float y,float r,int type,int state,int opacity)
       setTextSize(r*1.5);
       text(str(state),x,y,MAX_INT);
     }
+  }
+  else if(show_type_label && type>=0)
+  {
+    fill(255,255,255);
+    noStroke();
+    textAlign(CENTER,CENTER);
+    setTextSize(r);
+    text("abcdef"[type],x,y,MAX_INT);
   }
 }
 

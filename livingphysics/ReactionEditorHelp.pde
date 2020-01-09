@@ -13,8 +13,8 @@ void showReactionEditorHelp()
   float bottom = height-top;
   float internal_border = 5*pix;
   
-  String text_block1= "This is the reaction editor. The reaction only applies to atoms with matching color and state, so change them as necessary.\n\n"+
-    "Click on an atom first, then on its new color or its new state number. Remember that an atom's color can never be changed.\n\n"+
+  String text_block1= "This is the reaction editor. The reaction only applies to atoms with matching type and state, so change them as necessary.\n\n"+
+    "Click on an atom first, then on its new type or its new state number. Remember that an atom's type can never be changed.\n\n"+
     "To bond two atoms together, click between the two atoms on the right so that a line appears between them. Make sure there is no bond between the two atoms on the left.\n\n"+
     "To unbond two atoms, have them bonded before and unbonded afterwards.";
   
