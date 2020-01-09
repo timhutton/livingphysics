@@ -3,7 +3,9 @@ Living Physics
 
 Artificial chemistry game. Live version: https://timhutton.github.io/livingphysics/  <-- CLICK TO PLAY
 
-<a href="https://timhutton.github.io/livingphysics/"><img width="200px" src="https://user-images.githubusercontent.com/647092/69833661-3b8ac580-122d-11ea-95a8-a17bb135854a.png"></img></a>
+<a href="https://timhutton.github.io/livingphysics/"><img width="200px" src="https://user-images.githubusercontent.com/647092/72103924-23c15980-3322-11ea-8586-8713bc27c914.png"></img></a> 
+<a href="https://timhutton.github.io/livingphysics/"><img width="200px" src="https://user-images.githubusercontent.com/647092/72103977-3f2c6480-3322-11ea-85e7-5905cfa25acd.png"></img></a>
+
 
 History:
  - OrganicBuilder was a version of this idea, written as a Java applet. Lots of people used it, and in 2007 I wrote <a href="http://www.sq3.org.uk/papers/ob_report.pdf">a paper</a> about what they created.
