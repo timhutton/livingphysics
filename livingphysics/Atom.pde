@@ -198,7 +198,7 @@ void drawAnAtom(float x,float y,float r,int type,int state,int opacity)
    boolean show_type_label = true;
   if(type>=0) // sometimes we don't want to show the type, use -1 for this
   {
-    final color[] atom_type_colors = { 0xff0000,0xffff00,0x00ff00,0x00ffff,0x0000ff,0xff00ff };
+    final color[] atom_type_colors = { 0xff0000,0xecec00,0x00f000,0x05ecec,0x5b5bfc,0xff00ff };
     color c = atom_type_colors[type];
     c |= opacity << 24;
     fill(c);
